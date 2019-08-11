@@ -1,7 +1,7 @@
-from vk.types.base import BaseModel
+from ..base import BaseModel
 
 class PostSource(BaseModel):
-    type: str
-    platform: str
-    data: str
-    url: str
+    type: str = None
+    platform: str = None
+    data: str = None
+    url: str = None

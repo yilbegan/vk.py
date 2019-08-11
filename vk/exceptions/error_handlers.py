@@ -6,11 +6,12 @@ import typing
 
 logger = logging.getLogger(__name__)
 
-class ExceptionHandler:
+
+class APIErrorHandler:
     def __init__(self, vk):
         self.vk = vk
 
-    async def _to_many_requests_handle(self, json):
+    async def to_many_requests_handle(self, json):
         logger.debug("To many requests exception handle..")
         await asyncio.sleep(.48)
         params = {}
@@ -23,16 +24,15 @@ class ExceptionHandler:
                 continue
 
             params.update({key: value})
-        return await self.vk._api_request(method_name = method_name, params = params)
+        return await self.vk.api_request(method_name = method_name, params = params)
 
-
-    async def _error_handle(self, json):
+    async def error_handle(self, json):
         logger.debug("Some exception handle..")
         error = json["error"]
 
         code: int = error["error_code"]
         if code == 6:  # Too many requests https://vk.com/dev/errors
-            return await self._to_many_requests_handle(json)
+            return await self.to_many_requests_handle(json)
 
         msg: typing.AnyStr = error["error_msg"]
 

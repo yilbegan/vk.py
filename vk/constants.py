@@ -32,3 +32,7 @@ API_VERSION: str = "5.101"  # current api version https://vk.com/dev/versions
 
 API_LINK: str = "https://api.vk.com/method/"
 
+METHODS_WHICH_HAVE_OBJECTS = ["messages"]
+
+DEFAULT_RETURN_TYPE = "json"
+

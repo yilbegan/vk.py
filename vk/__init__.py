@@ -25,5 +25,8 @@
 
 from . import constants
 from .vk import VK
+from . import types
+from . import methods
+from . import exceptions
 
 __author__ = """prostomarkeloff"""
