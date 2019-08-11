@@ -5,7 +5,6 @@ from enum import Enum
 import typing
 
 
-
 class Actions(Enum):
     chat_photo_update = "chat_photo_update"
     chat_photo_remove = "chat_photo_remove"
@@ -17,10 +16,12 @@ class Actions(Enum):
     chat_unpin_message = "chat_unpin_message"
     chat_invite_user_by_link = "chat_invite_user_by_link"
 
+
 class MessageActionPhoto(BaseModel):
     photo_50: str = None
     photo_100: str = None
     photo_200: str = None
+
 
 class MessageAction(BaseModel):
     type: Actions = None
@@ -28,6 +29,7 @@ class MessageAction(BaseModel):
     text: str = None
     email: str = None
     photo: MessageActionPhoto = None
+
 
 class Message(BaseModel):
     id: int = None
@@ -40,5 +42,8 @@ class Message(BaseModel):
     important: bool = None
     geo: Geo = None
     payload: str = None
-    fwd_messages: typing.List[...] = None
     action: MessageAction = None
+    fwd_messages: typing.List["Message"] = None
+
+Message.update_forward_refs()
+

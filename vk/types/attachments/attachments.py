@@ -19,6 +19,7 @@ import typing
 
 
 class Attachments(Enum):
+    not_attachments = []
     photo = Photo
     posted_photo = PostedPhoto
     video = Video

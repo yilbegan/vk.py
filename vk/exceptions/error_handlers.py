@@ -13,7 +13,7 @@ class APIErrorHandler:
 
     async def to_many_requests_handle(self, json):
         logger.debug("To many requests exception handle..")
-        await asyncio.sleep(.48)
+        await asyncio.sleep(0.34)
         params = {}
         method_name = None
         for param in json["error"]["request_params"]:
@@ -24,6 +24,7 @@ class APIErrorHandler:
                 continue
 
             params.update({key: value})
+
         return await self.vk.api_request(method_name = method_name, params = params)
 
     async def error_handle(self, json):

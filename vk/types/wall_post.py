@@ -21,7 +21,7 @@ class WallPost(BaseModel):
     reply_owner_id: int = None
     reply_post_id: int = None
     friends_only: int = None
-    comments: WallComments = None
+    comments: WallPostComments = None
     likes: Like = None
     reposts: Repost = None
     post_type: str = None

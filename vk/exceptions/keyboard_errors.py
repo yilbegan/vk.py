@@ -1,0 +1,2 @@
+class KeyboardException(Exception):
+    pass

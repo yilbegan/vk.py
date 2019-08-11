@@ -2,16 +2,17 @@ from ..base import BaseModel
 from vk.types.attachments import Photo
 from vk.types.additional import PhotoSizes
 
-from typing import List, SupportsInt
+from typing import List
+import typing
 
 class PollAnswer(BaseModel):
     id: int = None
     text: str = None
     votes: int = None
-    rate: SupportsInt = None
+    rate: typing.Union[int, float] = None
 
 class PollBackgroundPoint(BaseModel):
-    position: SupportsInt = None
+    position: typing.Union[int, float] = None
     color: str = None
 
 class PollBackground(BaseModel):

@@ -5,8 +5,8 @@ import typing
 class Place(BaseModel):
     id: int = None
     title: str = None
-    latitude: typing.SupportsInt = None
-    longitude: typing.SupportsInt = None
+    latitude: typing.Union[int, float] = None
+    longitude: typing.Union[int, float] = None
     type: str = None
     country: int = None
     city: int = None
