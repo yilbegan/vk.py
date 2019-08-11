@@ -1,4 +1,4 @@
-from vk.types import BaseModel
+from ..base import BaseModel
 from vk.types.additional import AudioGenres
 
 import typing
