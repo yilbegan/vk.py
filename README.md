@@ -13,6 +13,8 @@
 
 ### 🏠 [Homepage](github.com/prostomarkeloff/vk.py)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
+
 This library implemented all VK methods and types, based on PyDantic models.
 
 ## Install
