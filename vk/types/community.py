@@ -5,6 +5,8 @@ from enum import IntEnum
 
 import typing
 
+# https://vk.com/dev/objects/group
+
 
 class CommunityBanInfo(BaseModel):
     end_date: int = None

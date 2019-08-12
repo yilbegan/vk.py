@@ -6,6 +6,9 @@ import orjson
 
 logger = logging.getLogger(__name__)
 
+
+# https://vk.com/dev/bots_longpoll
+
 class BotLongPoll(mixins.ContextInstanceMixin):
     def __init__(self, group_id: int, vk: VK):
         """
@@ -31,17 +34,17 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         self.key = resp["key"]
         self.ts = resp["ts"]
 
-        logger.debug(f"Prepare longpoll. Server - {self.server}. Key - {self.key}. TS - {self.ts}")
+        logger.debug(f"Prepare polling. Server - {self.server}. Key - {self.key}. TS - {self.ts}")
 
-    async def get_server(self):
+    async def get_server(self) -> dict:
         """
 
         :return:
         """
-        resp = await self.vk.api_request("groups.getLongPollServer", params={"group_id": self.group_id})
+        resp = await self.vk.api_request("groups.getLongPollServer", params = {"group_id": self.group_id})
         return resp
 
-    async def get_updates(self, key, server, ts):
+    async def get_updates(self, key: str, server: str, ts: str) -> dict:
         """
 
         :param key:
@@ -51,27 +54,29 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         """
         async with self.vk.client.post(f"{server}?act=a_check&key={key}&ts={ts}&wait=25") as response:
             resp = await response.json(loads = orjson.loads)
-            logger.debug(f"Get updates: {resp['updates']}")
+            logger.debug(f"Get updates from polling: {resp['updates']}")
             return resp
 
-    async def listen(self):
+    async def listen(self) -> dict:
         """
 
-        :return:
+        :return: 1 event
         """
-        updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
+        updates = await self.get_updates(key = self.key, server = self.server, ts = self.ts)
         self.ts = updates["ts"]
-        return updates["updates"]
+        if updates["updates"]:
+            return updates["updates"][0]
 
-    async def run(self):
+    async def run(self) -> dict:
         """
 
-        :return: list of updates coming from VK
+        :return: update coming from VK
         """
         if not self.runned:
             await self._prepare_longpoll()
             self.runned = True
-            logger.debug("Polling runned!")
+            logger.debug("Polling started!")
         while True:
-            yield await self.listen()
-
+            event = await self.listen()
+            if event:
+                yield event

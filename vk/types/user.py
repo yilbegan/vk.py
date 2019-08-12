@@ -6,6 +6,8 @@ from enum import IntEnum
 
 import typing
 
+# https://vk.com/dev/objects/user
+
 class UserCareer(BaseModel):
     group_id: int = None
     company: str = None

@@ -1,6 +1,9 @@
 from ..base import BaseModel
 from vk.types.attachments import Photo
 
+# https://vk.com/dev/objects/market_album
+
+
 class MarketAlbum(BaseModel):
     id: int = None
     owner_id: int = None

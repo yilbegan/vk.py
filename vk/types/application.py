@@ -6,6 +6,8 @@ from enum import Enum, IntEnum
 import typing
 
 
+# https://vk.com/dev/objects/app
+
 class ApplicationType(Enum):
     app = "social app"
     game = "game"

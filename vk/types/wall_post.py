@@ -4,6 +4,7 @@ from .attachments import Like, Repost, Attachments, Geo
 from .additional import PostSource
 import typing
 
+# https://vk.com/dev/objects/post
 
 class WallPostComments(BaseModel):
     count: int = None

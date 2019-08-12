@@ -2,6 +2,9 @@ from ..base import BaseModel
 
 import typing
 
+
+# https://vk.com/dev/objects/video
+
 class Video(BaseModel):
     id: int = None
     owner_id: int = None

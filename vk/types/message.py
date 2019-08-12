@@ -5,6 +5,8 @@ from enum import Enum
 import typing
 
 
+# https://vk.com/dev/objects/message
+
 class Actions(Enum):
     chat_photo_update = "chat_photo_update"
     chat_photo_remove = "chat_photo_remove"

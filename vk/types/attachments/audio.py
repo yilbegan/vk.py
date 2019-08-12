@@ -3,6 +3,9 @@ from vk.types.additional import AudioGenres
 
 import typing
 
+
+# https://vk.com/dev/objects/audio
+
 class Audio(BaseModel):
     id: int = None
     owner_id: int = None

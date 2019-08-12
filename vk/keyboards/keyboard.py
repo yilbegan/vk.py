@@ -4,6 +4,8 @@ from ..exceptions import KeyboardException
 import logging
 import orjson
 
+import typing
+
 logger = logging.getLogger(__name__)
 
 
@@ -42,7 +44,7 @@ class Keyboard:
         :return:
         """
         if len(self.buttons) >= 10:
-            raise KeyboardException('Max 10 row')
+            raise KeyboardException('Max 10 rows')
 
         self.buttons.append([])
 
@@ -151,7 +153,7 @@ class Keyboard:
 
         self._add_button(action)
 
-    def get_keyboard(self):
+    def get_keyboard(self) -> typing.AnyStr:
         """
 
         :return:
@@ -159,9 +161,9 @@ class Keyboard:
         return orjson.dumps(self.keyboard).decode("utf-8")
 
     @classmethod
-    def get_empty_keyboard(cls):
+    def get_empty_keyboard(cls) -> typing.AnyStr:
         """
 
         :return:
         """
-        return cls(one_time = True).decode("utf-8")
+        return cls(one_time = True).get_keyboard()

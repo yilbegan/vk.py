@@ -1,5 +1,8 @@
 from ..base import BaseModel
 
+# https://vk.com/dev/objects/page
+
+
 class Page(BaseModel):
     id: int = None
     group_id: int = None

@@ -5,6 +5,9 @@ from vk.types.additional import PhotoSizes
 from typing import List
 import typing
 
+
+# https://vk.com/dev/objects/poll
+
 class PollAnswer(BaseModel):
     id: int = None
     text: str = None

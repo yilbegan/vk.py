@@ -2,6 +2,7 @@ from .base import BaseModel
 
 import typing
 
+# https://vk.com/dev/objects/chat
 
 class ChatPushSettings(BaseModel):
     sound: int = None

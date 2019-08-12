@@ -14,6 +14,9 @@ class BaseMethod:
     def __repr__(self):
         return "%s(%r)" % (self.__class__, self.__dict__)
 
+    async def api_request(self, method_name: str, params: dict = None):
+        return await self.vk._api_request(method_name, params, _raw_mode = True)
+
     @staticmethod
     def create_params(params):
         """

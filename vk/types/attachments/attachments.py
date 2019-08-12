@@ -18,6 +18,8 @@ from .pretty_cards import PrettyCards
 import typing
 
 
+# https://vk.com/dev/objects/attachments_w
+
 class Attachments(Enum):
     not_attachments = []
     photo = Photo

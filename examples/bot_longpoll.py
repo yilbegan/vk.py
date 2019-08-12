@@ -4,27 +4,40 @@ from vk.bot_longpoll import BotLongPoll
 import asyncio
 import logging
 
-logging.basicConfig(level = "DEBUG")
-loop = asyncio.get_event_loop()
-token = <TOKEN> # bot token
+logging.basicConfig(level = "INFO")
 
-vk = VK(access_token = token, loop = loop)
-longpoll = BotLongPoll(group_id = <id>, vk = vk)
+token = "TOKEN"
+vk = VK(access_token = token)
+id = "GROUP_ID"
+longpoll = BotLongPoll(group_id = id, vk = vk)
 
-async def main():
-    async for updates in longpoll.run():
-        print(updates)
+async def send_message(obj):
+    params = {
+        "random_id": 0,
+        "message": obj["text"],
+        "peer_id": obj["peer_id"],
+    }
 
-async def pretty_close():
-    await asyncio.sleep(.2)
+    await vk.api_request("messages.send", params)
+
+
+async def listen_group():
+    async for event in longpoll.run():
+        print(event)
+        if event["type"] == "message_new":
+            await send_message(event["object"])
+
+
+
+async def on_startup():
+    print("Started!")
+
+
+async def on_shutdown():
     await vk.close()
-
+    await asyncio.sleep(0.250)
+    print("closed!")
 
 if __name__ == "__main__":
-    try:
-        loop.run_until_complete(main())
-    finally:
-        loop.run_until_complete(pretty_close())
-
-
-
+    vk.add_task(listen_group)
+    vk.run(on_shutdown = on_shutdown, on_startup = on_startup)

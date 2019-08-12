@@ -35,12 +35,13 @@ from aiohttp import ClientSession
 from vk.exceptions import APIErrorHandler
 from vk.utils.mixins import ContextInstanceMixin
 
-from vk.methods import Messages
+from vk.methods import Messages, Account
 
 import asyncio
-import typing
 import orjson
+import uvloop
 
+import typing
 import logging
 
 logger = logging.getLogger(__name__)
@@ -63,11 +64,14 @@ class VK(ContextInstanceMixin):
         self.api_version = API_VERSION
         self.api_error_handler = APIErrorHandler(self)
         self.raw_mode = raw_mode
+        self.tasks = []
 
         self.messages = Messages(self, category = "messages")
+        self.account = Account(self, category = "account")
 
 
-    async def _api_request(self, method_name: typing.AnyStr, params: dict = None):
+
+    async def _api_request(self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False):
         """
 
         :param method_name:
@@ -85,13 +89,13 @@ class VK(ContextInstanceMixin):
                 logger.debug(f"Response from API: {json}")
                 if "error" in json:
                     return await self.api_error_handler.error_handle(json)
-                if self.raw_mode:
+                if self.raw_mode or _raw_mode:
                     return json
 
                 response = json["response"]
                 return response
 
-    async def api_request(self, method_name, params = None) -> dict:
+    async def api_request(self, method_name: str, params: dict) -> dict:
         """
 
         :param method_name:
@@ -100,11 +104,43 @@ class VK(ContextInstanceMixin):
         """
         return await self._api_request(method_name = method_name, params = params)
 
+    def add_task(self, task: typing.Callable):
+        """
+
+        :param task:
+        :return:
+        """
+        if asyncio.iscoroutinefunction(task):
+            self.tasks.append(task)
+            logger.info(f"Task {task.__name__.upper()} successfully added!")
+        else:
+            raise RuntimeError("Unexpected task. Tasks may be only coroutine")
 
     async def close(self):
         """
         :return:
         """
         if isinstance(self.client, ClientSession) and not self.client.closed:
-            logger.info("Goodbye!")
             await self.client.close()
+
+
+    def run(self, on_shutdown: typing.Callable = None, on_startup: typing.Callable = None):
+        """
+        This method run loop.
+        :return:
+        """
+        if len(self.tasks) < 1:
+            raise RuntimeError("Count of tasks - 0. Add tasks.")
+        tasks = [task() for task in self.tasks]
+        try:
+            if on_startup is not None:
+                self.loop.run_until_complete(on_startup())
+            tasks = asyncio.gather(*tasks)
+            uvloop.install()
+            logger.info("Loop started!")
+            self.loop.run_until_complete(tasks)
+        finally:
+            if on_shutdown is not None:
+                self.loop.run_until_complete(on_shutdown())
+            logger.info("Loop closed!")
+            self.loop.close()

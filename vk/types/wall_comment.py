@@ -3,10 +3,11 @@ from .attachments import Attachments
 
 import typing
 
+# https://vk.com/dev/objects/comment
 
 class WallCommentThread(BaseModel):
     count: int = None
-    items: typing.List[...] = None
+    items: typing.List["WallComment"] = None
     can_post: bool = None
     show_reply_button: bool = None
     groups_can_post: bool = None

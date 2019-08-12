@@ -3,6 +3,8 @@ from vk.types.additional import PhotoSizes
 
 import typing
 
+# https://vk.com/dev/objects/photo
+
 
 class Photo(BaseModel):
     id: int = None
