@@ -33,13 +33,14 @@ from asyncio import AbstractEventLoop
 from aiohttp import ClientSession
 
 from vk.exceptions import APIErrorHandler
-from vk.utils.mixins import ContextInstanceMixin
+from vk.utils import ContextInstanceMixin
+from vk.utils import TaskManager
+
 
 from vk.methods import Messages, Account
 
 import asyncio
 import orjson
-import uvloop
 
 import typing
 import logging
@@ -62,9 +63,11 @@ class VK(ContextInstanceMixin):
         self.loop = loop if loop is not None else asyncio.get_event_loop()
         self.client = client if client is not None else ClientSession(json_serialize = orjson.dumps)
         self.api_version = API_VERSION
+
         self.api_error_handler = APIErrorHandler(self)
+        self.task_manager = TaskManager(self.loop)
+
         self.raw_mode = raw_mode
-        self.tasks = []
 
         self.messages = Messages(self, category = "messages")
         self.account = Account(self, category = "account")
@@ -104,18 +107,6 @@ class VK(ContextInstanceMixin):
         """
         return await self._api_request(method_name = method_name, params = params)
 
-    def add_task(self, task: typing.Callable):
-        """
-
-        :param task:
-        :return:
-        """
-        if asyncio.iscoroutinefunction(task):
-            self.tasks.append(task)
-            logger.info(f"Task {task.__name__.upper()} successfully added!")
-        else:
-            raise RuntimeError("Unexpected task. Tasks may be only coroutine")
-
     async def close(self):
         """
         :return:
@@ -123,24 +114,3 @@ class VK(ContextInstanceMixin):
         if isinstance(self.client, ClientSession) and not self.client.closed:
             await self.client.close()
 
-
-    def run(self, on_shutdown: typing.Callable = None, on_startup: typing.Callable = None):
-        """
-        This method run loop.
-        :return:
-        """
-        if len(self.tasks) < 1:
-            raise RuntimeError("Count of tasks - 0. Add tasks.")
-        tasks = [task() for task in self.tasks]
-        try:
-            if on_startup is not None:
-                self.loop.run_until_complete(on_startup())
-            tasks = asyncio.gather(*tasks)
-            uvloop.install()
-            logger.info("Loop started!")
-            self.loop.run_until_complete(tasks)
-        finally:
-            if on_shutdown is not None:
-                self.loop.run_until_complete(on_shutdown())
-            logger.info("Loop closed!")
-            self.loop.close()

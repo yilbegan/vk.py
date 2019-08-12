@@ -24,5 +24,5 @@ async def on_shutdown():
     print("closed!")
 
 if __name__ == "__main__":
-    vk.add_task(status_get)
-    vk.run(on_shutdown = on_shutdown, on_startup = on_startup)
+    vk.task_manager.add_task(status_get)
+    vk.task_manager.run(on_shutdown = on_shutdown, on_startup = on_startup)
