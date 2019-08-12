@@ -5,6 +5,7 @@ import typing
 
 # https://vk.com/dev/objects/comment
 
+
 class WallCommentThread(BaseModel):
     count: int = None
     items: typing.List["WallComment"] = None

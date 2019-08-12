@@ -6,6 +6,7 @@ from vk.types.attachments import Graffiti, AudioMsg
 
 # https://vk.com/dev/objects/doc
 
+
 class DocumentType(IntEnum):
     text_document = 1
     archive = 2

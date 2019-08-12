@@ -8,6 +8,7 @@ import typing
 
 # https://vk.com/dev/objects/user
 
+
 class UserCareer(BaseModel):
     group_id: int = None
     company: str = None
@@ -17,6 +18,7 @@ class UserCareer(BaseModel):
     from_: int = None
     until: int = None
     position: str = None
+
 
 class UserCounters(BaseModel):
     albums: int = None
@@ -32,9 +34,11 @@ class UserCounters(BaseModel):
     followers: int = None
     pages: int = None
 
+
 class UserContacts(BaseModel):
     mobile_phone: str = None
     home_phone: str = None
+
 
 class UserEducation(BaseModel):
     university: int = None
@@ -42,6 +46,7 @@ class UserEducation(BaseModel):
     faculty: int = None
     faculty_name: str = None
     graduation: int = None
+
 
 class UserPlatform(IntEnum):
     m_vk_com = 1
@@ -54,9 +59,11 @@ class UserPlatform(IntEnum):
     vk_com = 7
     vk_mobile = 8
 
+
 class UserLastSeen(BaseModel):
     time: int = None
     platform: UserPlatform = None
+
 
 class UserMilitary(BaseModel):
     unit: str = None
@@ -64,6 +71,7 @@ class UserMilitary(BaseModel):
     country_id: int = None
     from_: int = None
     until: int = None
+
 
 class UserOccupation(BaseModel):
     type: str = None
@@ -82,6 +90,7 @@ class Political(IntEnum):
     apathetic = 8
     libertarian = 9
 
+
 class PeopleMain(IntEnum):
     intelect = 1
     creativity = 1
@@ -95,6 +104,7 @@ class PeopleMain(IntEnum):
     persistance = 5
     humor = 6
     love_for_life = 6
+
 
 class LifeMain(IntEnum):
     family = 1
@@ -112,6 +122,7 @@ class LifeMain(IntEnum):
     fame = 8
     influence = 8
 
+
 class Smoking(IntEnum):
     very_negative = 1
     negative = 2
@@ -119,12 +130,14 @@ class Smoking(IntEnum):
     compromisable = 4
     positive = 5
 
+
 class Alcohol(BaseModel):
     very_negative = 1
     negative = 2
     neutral = 3
     compromisable = 4
     positive = 5
+
 
 class UserPersonal(BaseModel):
     political: Political = None
@@ -148,6 +161,7 @@ class UserRelation(IntEnum):
     in_civil_union = 8
     not_specified = 0
 
+
 class SchoolType(IntEnum):
     school = 0
     gymnasium = 1
@@ -164,6 +178,7 @@ class SchoolType(IntEnum):
     specialized_school = 12
     art_school = 13
 
+
 class School(BaseModel):
     id: int = None
     country: int = None
@@ -176,6 +191,7 @@ class School(BaseModel):
     speciality: str = None
     type: int = None
     type_str: SchoolType = None
+
 
 class Universitiy(BaseModel):
     id: int = None
@@ -260,5 +276,3 @@ class User(BaseModel):
     universities: typing.List[Universitiy] = None
     verified: int = None
     wall_comments: int = None
-
-

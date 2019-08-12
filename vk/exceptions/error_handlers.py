@@ -25,7 +25,7 @@ class APIErrorHandler:
 
             params.update({key: value})
 
-        return await self.vk.api_request(method_name = method_name, params = params)
+        return await self.vk.api_request(method_name=method_name, params=params)
 
     async def error_handle(self, json):
         logger.debug("Some exception handle..")

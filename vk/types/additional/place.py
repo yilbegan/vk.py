@@ -2,6 +2,7 @@ from ..base import BaseModel
 
 import typing
 
+
 class Place(BaseModel):
     id: int = None
     title: str = None
@@ -11,6 +12,7 @@ class Place(BaseModel):
     country: int = None
     city: int = None
     address: str = None
+
 
 class GeoPlace(BaseModel):
     id: int = None

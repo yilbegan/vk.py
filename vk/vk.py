@@ -36,8 +36,7 @@ from vk.exceptions import APIErrorHandler
 from vk.utils import ContextInstanceMixin
 from vk.utils import TaskManager
 
-
-from vk.methods import Messages, Account
+from vk.methods import API
 
 import asyncio
 import orjson
@@ -68,11 +67,6 @@ class VK(ContextInstanceMixin):
         self.task_manager = TaskManager(self.loop)
 
         self.raw_mode = raw_mode
-
-        self.messages = Messages(self, category = "messages")
-        self.account = Account(self, category = "account")
-
-
 
     async def _api_request(self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False):
         """
@@ -107,10 +101,18 @@ class VK(ContextInstanceMixin):
         """
         return await self._api_request(method_name = method_name, params = params)
 
+
+    def get_api(self):
+        """
+        Get API class
+        :return:
+        """
+        return API(self)
+
     async def close(self):
         """
+        Close aiohttp client
         :return:
         """
         if isinstance(self.client, ClientSession) and not self.client.closed:
             await self.client.close()
-

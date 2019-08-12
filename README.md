@@ -27,6 +27,14 @@ coming soon...
 coming soon..
 ```
 
+## Philosophy and Features
+- ***k the low level API. Set async/await in your code and it will work beautifully and quickly!
+  
+- All typed. All objects and responses which represents API (vk.com/dev) is in library. This helps IDE`s and help you save time.
+  
+- All fast. VK.py uses [orjson](https://github.com/ijl/orjson) as JSON serialize/deserealize driver and [uvloop](https://github.com/MagicStack/uvloop) as event loop. This help you write effective code.
+
+- Easily debugging. All places in code logged. Set logger level as "DEBUG" and debug your code!
 ## Author
 
 👤 **prostomarkeloff**

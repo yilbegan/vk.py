@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 # https://vk.com/dev/bots_longpoll
 
+
 class BotLongPoll(mixins.ContextInstanceMixin):
     def __init__(self, group_id: int, vk: VK):
         """
@@ -34,14 +35,18 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         self.key = resp["key"]
         self.ts = resp["ts"]
 
-        logger.debug(f"Prepare polling. Server - {self.server}. Key - {self.key}. TS - {self.ts}")
+        logger.debug(
+            f"Prepare polling. Server - {self.server}. Key - {self.key}. TS - {self.ts}"
+        )
 
     async def get_server(self) -> dict:
         """
 
         :return:
         """
-        resp = await self.vk.api_request("groups.getLongPollServer", params = {"group_id": self.group_id})
+        resp = await self.vk.api_request(
+            "groups.getLongPollServer", params={"group_id": self.group_id}
+        )
         return resp
 
     async def get_updates(self, key: str, server: str, ts: str) -> dict:
@@ -52,8 +57,10 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         :param ts:
         :return:
         """
-        async with self.vk.client.post(f"{server}?act=a_check&key={key}&ts={ts}&wait=25") as response:
-            resp = await response.json(loads = orjson.loads)
+        async with self.vk.client.post(
+            f"{server}?act=a_check&key={key}&ts={ts}&wait=25"
+        ) as response:
+            resp = await response.json(loads=orjson.loads)
             logger.debug(f"Get updates from polling: {resp['updates']}")
             return resp
 
@@ -62,7 +69,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
         :return: 1 event
         """
-        updates = await self.get_updates(key = self.key, server = self.server, ts = self.ts)
+        updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
         self.ts = updates["ts"]
         if updates["updates"]:
             return updates["updates"][0]

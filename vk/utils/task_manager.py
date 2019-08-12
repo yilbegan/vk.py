@@ -12,8 +12,9 @@ class TaskManager:
         self.tasks = []
         self.loop = loop
 
-
-    def run(self, on_shutdown: typing.Callable = None, on_startup: typing.Callable = None):
+    def run(
+        self, on_shutdown: typing.Callable = None, on_startup: typing.Callable = None
+    ):
         """
         This method run loop.
         :return:
@@ -33,7 +34,6 @@ class TaskManager:
                 self.loop.run_until_complete(on_shutdown())
             logger.info("Loop closed!")
             self.loop.close()
-
 
     def add_task(self, task: typing.Callable):
         """

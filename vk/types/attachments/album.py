@@ -2,6 +2,7 @@ from ..base import BaseModel
 
 from vk.types.attachments import Photo
 
+
 class Album(BaseModel):
     id: int = None
     thumb: Photo = None

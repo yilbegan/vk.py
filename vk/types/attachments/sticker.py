@@ -1,5 +1,6 @@
 from ..base import BaseModel
 
+
 class Sticker(BaseModel):
     id: int = None
     product_id: int = None

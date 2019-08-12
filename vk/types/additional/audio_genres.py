@@ -1,5 +1,6 @@
 from enum import Enum, IntEnum
 
+
 class AudioGenres(IntEnum):
     rock = 1
     pop = 2

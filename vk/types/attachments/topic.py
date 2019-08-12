@@ -5,6 +5,7 @@ from .attachments import Attachments
 # https://vk.com/dev/objects/topic
 # https://vk.com/dev/objects/comment_board
 
+
 class TopicComment(BaseModel):
     id: int = None
     from_id: int = None

@@ -3,6 +3,7 @@ from vk.types.attachments import Photo
 
 from typing import Any
 
+
 class Link(BaseModel):
     url: str = None
     title: str = None

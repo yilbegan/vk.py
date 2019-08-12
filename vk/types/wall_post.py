@@ -6,6 +6,7 @@ import typing
 
 # https://vk.com/dev/objects/post
 
+
 class WallPostComments(BaseModel):
     count: int = None
     can_post: int = None

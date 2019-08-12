@@ -6,6 +6,7 @@ import typing
 
 # https://vk.com/dev/objects/audio
 
+
 class Audio(BaseModel):
     id: int = None
     owner_id: int = None
@@ -18,4 +19,3 @@ class Audio(BaseModel):
     genre_id: AudioGenres = None
     date: int = None
     no_search: int = 0
-

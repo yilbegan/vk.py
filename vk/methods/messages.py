@@ -5,7 +5,6 @@ import typing
 
 
 class Messages(BaseMethod):
-
     async def add_chat_user(self, chat_id: int, user_id: int):
         """
 

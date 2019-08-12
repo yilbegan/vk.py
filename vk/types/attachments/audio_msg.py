@@ -1,6 +1,7 @@
 from ..base import BaseModel
 from typing import List
 
+
 class AudioMsg(BaseModel):
     duration: int = None
     waveform: List[int] = None

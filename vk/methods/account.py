@@ -6,8 +6,8 @@ from vk.types.user import User
 
 import typing
 
-class Account(BaseMethod):
 
+class Account(BaseMethod):
     async def ban(self, owner_id: int):
         """
 

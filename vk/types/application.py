@@ -8,17 +8,18 @@ import typing
 
 # https://vk.com/dev/objects/app
 
+
 class ApplicationType(Enum):
     app = "social app"
     game = "game"
     site = "site"
     standalone = "standalone"
 
+
 class LeaderBoardType(IntEnum):
     not_supported = 0
     by_level = 1
     by_points = 2
-
 
 
 class Application(BaseModel):
@@ -48,4 +49,3 @@ class Application(BaseModel):
     screen_name: str = None
     icon_16: str = None
     screenshots: typing.List[Photo] = None
-

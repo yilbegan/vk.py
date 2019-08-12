@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 # Keyboards: https://vk.com/dev/bots_docs_3
 
+
 class ButtonColor(Enum):
     PRIMARY = "primary"  # blue
     SECONDARY = "secondary"  # white
@@ -33,10 +34,7 @@ class Keyboard:
         """
         self.one_time = one_time
         self.buttons = [[]]
-        self.keyboard = {
-            "one_time": one_time,
-            "buttons": self.buttons
-        }
+        self.keyboard = {"one_time": one_time, "buttons": self.buttons}
 
     def add_row(self):
         """
@@ -44,7 +42,7 @@ class Keyboard:
         :return:
         """
         if len(self.buttons) >= 10:
-            raise KeyboardException('Max 10 rows')
+            raise KeyboardException("Max 10 rows")
 
         self.buttons.append([])
 
@@ -57,7 +55,9 @@ class Keyboard:
         current_row = self.buttons[-1]
         current_row.append(action)
 
-    def add_text_button(self, text: str, color: ButtonColor = ButtonColor.PRIMARY, payload = None):
+    def add_text_button(
+        self, text: str, color: ButtonColor = ButtonColor.PRIMARY, payload=None
+    ):
         """
 
         :param text:
@@ -91,7 +91,7 @@ class Keyboard:
 
         self._add_button(action)
 
-    def add_location_button(self, payload: str = None, ):
+    def add_location_button(self, payload: str = None):
         """
 
         :param payload:
@@ -101,12 +101,7 @@ class Keyboard:
         if payload is None:
             payload = ""
 
-        action = {
-            "action": {
-                "type": ButtonType.LOCATION.value,
-                "payload": payload,
-            }
-        }
+        action = {"action": {"type": ButtonType.LOCATION.value, "payload": payload}}
 
         self._add_button(action)
 
@@ -122,11 +117,7 @@ class Keyboard:
             payload = ""
 
         action = {
-            "action": {
-                "type": ButtonType.VKPAY.value,
-                "payload": payload,
-                "hash": hash,
-            }
+            "action": {"type": ButtonType.VKPAY.value, "payload": payload, "hash": hash}
         }
 
         self._add_button(action)
@@ -166,4 +157,4 @@ class Keyboard:
 
         :return:
         """
-        return cls(one_time = True).get_keyboard()
+        return cls(one_time=True).get_keyboard()

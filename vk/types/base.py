@@ -1,6 +1,7 @@
 from vk.utils.mixins import ContextInstanceMixin
 import pydantic
 
+
 class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
     class Config:
         allow_mutation = False
@@ -11,16 +12,15 @@ class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
     def __repr__(self):
         return "%s(%r)" % (self.__class__, self.dict())
 
-
-
     @property
     def vk(self):
         from vk import VK
 
         vk = VK.get_current()
         if vk is None:
-            raise RuntimeError("Can't get VK instance from context. "
-                               "You can fix it with setting current instance: "
-                               "'VK.set_current(vk_instance)'")
+            raise RuntimeError(
+                "Can't get VK instance from context. "
+                "You can fix it with setting current instance: "
+                "'VK.set_current(vk_instance)'"
+            )
         return vk
-

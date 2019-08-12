@@ -4,6 +4,7 @@ import typing
 
 # https://vk.com/dev/objects/chat
 
+
 class ChatPushSettings(BaseModel):
     sound: int = None
     disabled_until: int = None

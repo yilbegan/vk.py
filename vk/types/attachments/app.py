@@ -1,5 +1,6 @@
 from ..base import BaseModel
 
+
 class App(BaseModel):
     id: int = None
     owner_id: int = None

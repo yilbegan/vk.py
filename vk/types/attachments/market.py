@@ -6,6 +6,7 @@ import typing
 
 # https://vk.com/dev/objects/market_item
 
+
 class MarketPriceCurrency(BaseModel):
     id: int = None
     name: str = None

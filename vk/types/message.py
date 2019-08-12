@@ -7,6 +7,7 @@ import typing
 
 # https://vk.com/dev/objects/message
 
+
 class Actions(Enum):
     chat_photo_update = "chat_photo_update"
     chat_photo_remove = "chat_photo_remove"
@@ -47,5 +48,5 @@ class Message(BaseModel):
     action: MessageAction = None
     fwd_messages: typing.List["Message"] = None
 
-Message.update_forward_refs()
 
+Message.update_forward_refs()

@@ -8,15 +8,18 @@ import typing
 
 # https://vk.com/dev/objects/poll
 
+
 class PollAnswer(BaseModel):
     id: int = None
     text: str = None
     votes: int = None
     rate: typing.Union[int, float] = None
 
+
 class PollBackgroundPoint(BaseModel):
     position: typing.Union[int, float] = None
     color: str = None
+
 
 class PollBackground(BaseModel):
     id: int = None
@@ -27,6 +30,7 @@ class PollBackground(BaseModel):
     height: int = None
     images: List[PhotoSizes] = None
     points: List[PollBackgroundPoint]
+
 
 class Poll(BaseModel):
     id: int = None

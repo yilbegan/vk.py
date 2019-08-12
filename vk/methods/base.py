@@ -15,7 +15,7 @@ class BaseMethod:
         return "%s(%r)" % (self.__class__, self.__dict__)
 
     async def api_request(self, method_name: str, params: dict = None):
-        return await self.vk._api_request(method_name, params, _raw_mode = True)
+        return await self.vk._api_request(method_name, params, _raw_mode=True)
 
     @staticmethod
     def create_params(params):
@@ -29,22 +29,18 @@ class BaseMethod:
         return _params
 
     @staticmethod
-    def list_to_str(list: List):
-        list = str(list).strip('[]')
-        return list
-
+    def list_to_str(obj: List):
+        obj = str(obj).strip("[]")
+        return obj
 
     def get_method_name(self, func):
         name = func.__name__
 
         method_name = ""
-        for index, elem in enumerate(name.split("_"), start = 1):
+        for index, elem in enumerate(name.split("_"), start=1):
             if index == 1:
                 method_name += elem
                 continue
             method_name += elem.title()
 
         return self.category + "." + method_name
-
-
-

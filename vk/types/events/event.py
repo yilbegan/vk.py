@@ -16,6 +16,7 @@ import typing
 
 # https://vk.com/dev/groups_events
 
+
 class BaseEvent(BaseModel):
     group_id: int = None
 
@@ -134,9 +135,11 @@ class EventBoardPostDelete(BaseEvent):
     type: events.Board.BOARD_POST_DELETE = None
     object: EventsObjects.EventBoardPostDelete = None
 
+
 class EventMarketCommentNew(BaseEvent):
     type: events.Market.MARKET_COMMENT_NEW = None
     object: EventsObjects.EventMarketCommentNew = None
+
 
 class EventMarketCommentEdit(EventMarketCommentNew):
     type: events.Market.MARKET_COMMENT_EDIT = None
