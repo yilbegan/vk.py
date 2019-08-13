@@ -1,6 +1,6 @@
 # Welcome to vk.py 👋
 
-![Version](https://img.shields.io/badge/version-0.2.0-blue.svg?cacheSeconds=2592000) [ ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE) [![Twitter: prostomarkeloff](https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social)](https://twitter.com/prostomarkeloff)
+![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000) [ ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE) [![Twitter: prostomarkeloff](https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social)](https://twitter.com/prostomarkeloff)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
 
 > VK.py its a pretty and fully asynchronous API wrapper for VK API based on asyncio and aiohttp.
