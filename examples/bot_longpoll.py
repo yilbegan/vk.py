@@ -8,8 +8,8 @@ logging.basicConfig(level="INFO")
 
 token = "TOKEN"
 vk = VK(access_token=token)
-id = "GROUP_ID"
-longpoll = BotLongPoll(group_id=id, vk=vk)
+gid = 123456
+longpoll = BotLongPoll(group_id=gid, vk=vk)
 
 
 async def send_message(obj):
