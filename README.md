@@ -1,19 +1,14 @@
-<h1 align="center">Welcome to vk.py 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.2.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
-  </a>
-  <a href="https://twitter.com/prostomarkeloff">
-    <img alt="Twitter: prostomarkeloff" src="https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social" target="_blank" />
-  </a>
-</p>
+# Welcome to vk.py 👋
 
-> VK.py its a pretty and asynchronous API wrapper for VK API based on asyncio and aiohttp 🤟
+![Version](https://img.shields.io/badge/version-0.2.0-blue.svg?cacheSeconds=2592000) [ ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE) [![Twitter: prostomarkeloff](https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social)](https://twitter.com/prostomarkeloff)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
+
+> VK.py its a pretty and fully asynchronous API wrapper for VK API based on asyncio and aiohttp.
+
+
 
 ### 🏠 [Homepage](github.com/prostomarkeloff/vk.py)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
 
 This library implemented all VK methods and types, based on PyDantic models.
 
@@ -25,8 +20,22 @@ coming soon...
 
 ## Usage
 
-```sh
-coming soon..
+Simple example
+```python
+from vk import VK
+import logging
+
+logging.basicConfig(level="INFO")
+vk = VK(access_token=<TOKEN>)
+
+async def status_get():
+    resp = await vk.api_request("status.get")
+    print(resp)
+
+if __name__ == "__main__":
+    vk.task_manager.add_task(status_get)
+    vk.task_manager.run()
+
 ```
 
 ## Philosophy and Features
