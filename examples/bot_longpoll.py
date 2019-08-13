@@ -1,5 +1,5 @@
 from vk import VK
-from vk.bot_longpoll import BotLongPoll
+from vk.longpoll import BotLongPoll
 
 import asyncio
 import logging

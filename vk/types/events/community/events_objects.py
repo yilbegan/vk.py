@@ -1,90 +1,90 @@
-from ..base import BaseModel
+from vk.types.base import BaseModel
 
-from ..wall_comment import WallComment
-from ..attachments.topic import TopicComment
+from vk.types.wall_comment import WallComment
+from vk.types.attachments.topic import TopicComment
 
-from ..additional import JoinType, BlockReason, AdminLevel
-from ..attachments import Photo
+from vk.types.additional import JoinType, BlockReason, AdminLevel
+from vk.types.attachments import Photo
 
 import typing
 
 from enum import Enum
 
 
-class EventMessageAllow(BaseModel):
+class MessageAllow(BaseModel):
     user_id: int = None
     key: typing.Optional[str] = None
 
 
-class EventPhotoCommentNew(BaseModel, WallComment):
+class PhotoCommentNew(WallComment):
     photo_id: int = None
     photo_owner_id: int = None
 
 
-class EventPhotoCommentDelete(BaseModel):
+class PhotoCommentDelete(BaseModel):
     owner_id: int = None
     id: int = None
     user_id: int = None
     photo_id: int = None
 
 
-class EventVideoCommentNew(BaseModel, WallComment):
+class VideoCommentNew(WallComment):
     video_id: int = None
     video_owner_id: int = None
 
 
-class EventVideoCommentDelete(BaseModel):
+class VideoCommentDelete(BaseModel):
     owner_id: int = None
     id: int = None
     user_id: int = None
     video_id: int = None
 
 
-class EventWallReplyNew(BaseModel, WallComment):
+class WallReplyNew(WallComment):
     post_id: int = None
     post_owner_id: int = None
 
 
-class EventWallReplyDelete(BaseModel):
+class WallReplyDelete(BaseModel):
     owner_id: int = None
     id: int = None
     user_id: int = None
     post_id: int = None
 
 
-class EventBoardPostNew(BaseModel, TopicComment):
+class BoardPostNew(TopicComment):
     topic_id: int = None
     topic_owner_id: int = None
 
 
-class EventBoardPostDelete(BaseModel):
+class BoardPostDelete(BaseModel):
     topic_id: int = None
     id: int = None
 
 
-class EventMarketCommentNew(BaseModel, WallComment):
+class MarketCommentNew(WallComment):
     market_owner_id: int = None
     item_id: int = None
 
 
-class EventMarketCommentDelete(BaseModel):
+class MarketCommentDelete(BaseModel):
     owner_id: int = None
     id: int = None
     user_id: int = None
     item_id: int = None
 
 
-class EventGroupLeave(BaseModel):
+class GroupLeave(BaseModel):
     user_id: int = None
     self: int = None
 
 
-class EventGroupJoin(BaseModel):
+class GroupJoin(BaseModel):
     user_id: int = None
     join_type: JoinType = None
 
 
-class EventUserBlock(BaseModel):
+class UserBlock(BaseModel):
     admin_id: int = None
     user_id: int = None
     unblock_data: int = None
@@ -92,27 +92,27 @@ class EventUserBlock(BaseModel):
     comment: str = None
 
 
-class EventUserUnblock(BaseModel):
+class UserUnblock(BaseModel):
     admin_id: int = None
     user_id: int = None
     by_end_date: int = None
 
 
-class EventPollVoteNew(BaseModel):
+class PollVoteNew(BaseModel):
     owner_id: int = None
     poll_id: int = None
     option_id: int = None
     user_id: int = None
 
 
-class EventGroupOfficersEdit(BaseModel):
+class GroupOfficersEdit(BaseModel):
     admin_id: int = None
     user_id: int = None
     level_old: AdminLevel = None
     level_new: AdminLevel = None
 
 
-class EventGroupChangeSettingsChangesSectionEnable(Enum):
+class GroupChangeSettingsChangesSectionEnable(Enum):
     status_default = "status_default"
     audio = "audio"
     photo = "photo"
@@ -120,7 +120,7 @@ class EventGroupChangeSettingsChangesSectionEnable(Enum):
     market = "market"
 
 
-class EventGroupChangeSettingsChangesSectionName(Enum):
+class GroupChangeSettingsChangesSectionName(Enum):
     title = "title"
     description = "description"
     community_type = "access"
@@ -129,20 +129,20 @@ class EventGroupChangeSettingsChangesSectionName(Enum):
     public_subcategory = "public_subcategory"
     age_limits = "age_limits"
     website = "website"
-    enable_section = EventGroupChangeSettingsChangesSectionEnable
+    enable_section = GroupChangeSettingsChangesSectionEnable
 
 
-class EventGroupChangeSettingsChanges(BaseModel):
-    section_name: EventGroupChangeSettingsChangesSectionName = None
+class GroupChangeSettingsChanges(BaseModel):
+    section_name: GroupChangeSettingsChangesSectionName = None
     old_value: typing.Any = None
     new_value: typing.Any = None
 
 
-class EventGroupChangeSettings(BaseModel):
+class GroupChangeSettings(BaseModel):
     user_id: int = None
-    changes: EventGroupChangeSettingsChanges = None
+    changes: GroupChangeSettingsChanges = None
 
 
-class EventGroupChangePhoto(BaseModel):
+class GroupChangePhoto(BaseModel):
     user_id: int = None
     photo: Photo = None
