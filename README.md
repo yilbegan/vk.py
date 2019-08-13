@@ -15,7 +15,7 @@ This library implemented all VK methods and types, based on PyDantic models.
 ## Install
 
 ```sh
-coming soon...
+pip install vk.py
 ```
 
 ## Usage
@@ -37,6 +37,8 @@ if __name__ == "__main__":
     vk.task_manager.run()
 
 ```
+
+More examples [click](./examples)
 
 ## Philosophy and Features
 - ***k the low level API. Set async/await in your code and it will work beautifully and quickly!
