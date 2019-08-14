@@ -1,5 +1,6 @@
 from vk import VK
 from vk.longpoll import BotLongPoll
+from vk.utils import TaskManager
 
 import asyncio
 import logging
@@ -10,6 +11,7 @@ token = "TOKEN"
 vk = VK(access_token=token)
 gid = 123456
 longpoll = BotLongPoll(group_id=gid, vk=vk)
+task_manager = TaskManager(vk.loop)
 
 
 async def send_message(obj):
@@ -36,5 +38,5 @@ async def on_shutdown():
 
 
 if __name__ == "__main__":
-    vk.task_manager.add_task(listen_group)
-    vk.task_manager.run(on_shutdown=on_shutdown, on_startup=on_startup)
+    task_manager.add_task(listen_group)
+    task_manager.run(on_shutdown=on_shutdown, on_startup=on_startup)

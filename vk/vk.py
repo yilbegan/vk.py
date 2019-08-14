@@ -34,7 +34,6 @@ from aiohttp import ClientSession
 
 from vk.exceptions import APIErrorHandler
 from vk.utils import ContextInstanceMixin
-from vk.utils import TaskManager
 
 from vk.methods import API
 
@@ -62,7 +61,6 @@ class VK(ContextInstanceMixin):
         self.api_version = API_VERSION
 
         self.api_error_handler = APIErrorHandler(self)
-        self.task_manager = TaskManager(self.loop)
 
 
     async def _api_request(self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False):
