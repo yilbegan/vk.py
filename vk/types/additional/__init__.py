@@ -7,3 +7,9 @@ from .place import Place, GeoPlace
 from .join_type import JoinType
 from .block_reason import BlockReason
 from .admin_level import AdminLevel
+from .active_offer import ActiveOffer
+from .sex import Sex
+from .bdate import BdateVisiblity
+from .country import Country
+from .name_request import NameRequest
+from .push_settings import NotificationSettings
