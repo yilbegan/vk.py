@@ -1,4 +1,4 @@
-from ..utils import mixins
+from vk.utils import mixins
 from vk import VK
 
 import logging

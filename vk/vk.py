@@ -48,15 +48,13 @@ logger = logging.getLogger(__name__)
 
 
 class VK(ContextInstanceMixin):
-    def __init__(self, access_token: str, *, loop: AbstractEventLoop = None, client: ClientSession = None,
-                 raw_mode: bool = False):
+    def __init__(self, access_token: str, *, loop: AbstractEventLoop = None, client: ClientSession = None):
 
         """
 
-        :param access_token:
-        :param loop:
-        :param client:
-        :param raw_mode:
+        :param access_token: access token of VK user/community for access to VK methods.
+        :param loop: asyncio event loop, uses in Task manager/etc.
+        :param client: aiohttp client session
         """
         self.access_token = access_token
         self.loop = loop if loop is not None else asyncio.get_event_loop()
@@ -66,16 +64,15 @@ class VK(ContextInstanceMixin):
         self.api_error_handler = APIErrorHandler(self)
         self.task_manager = TaskManager(self.loop)
 
-        self.raw_mode = raw_mode
 
     async def _api_request(self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False):
         """
 
-        :param method_name:
-        :param params:
+        :param method_name: method of name when need to call
+        :param params: parameters with method
+        :param _raw_mode: signal of return 'raw' response, or not (basically, returns response["response"])
         :return:
         """
-
         if params is None or not isinstance(params, dict):
             params = {}
 
@@ -86,21 +83,21 @@ class VK(ContextInstanceMixin):
                 logger.debug(f"Response from API: {json}")
                 if "error" in json:
                     return await self.api_error_handler.error_handle(json)
-                if self.raw_mode or _raw_mode:
+
+                if _raw_mode:
                     return json
 
                 response = json["response"]
                 return response
 
-    async def api_request(self, method_name: str, params: dict) -> dict:
+    async def api_request(self, method_name: str, params: dict = None) -> dict:
         """
-
+        Send api request to VK server
         :param method_name:
         :param params:
         :return:
         """
         return await self._api_request(method_name = method_name, params = params)
-
 
     def get_api(self):
         """
@@ -111,7 +108,7 @@ class VK(ContextInstanceMixin):
 
     async def close(self):
         """
-        Close aiohttp client
+        Close aiohttp client session.
         :return:
         """
         if isinstance(self.client, ClientSession) and not self.client.closed:

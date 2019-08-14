@@ -22,12 +22,15 @@
  SOFTWARE.
 
 """
+from .vk import VK
 
 from . import constants
-from .vk import VK
 from . import types
 from . import methods
 from . import exceptions
+from . import utils
+from . import keyboards
+from . import longpoll
 
 __author__ = """prostomarkeloff"""
 

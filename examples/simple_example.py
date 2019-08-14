@@ -27,3 +27,4 @@ async def on_shutdown():
 if __name__ == "__main__":
     vk.task_manager.add_task(status_get)
     vk.task_manager.run(on_shutdown=on_shutdown, on_startup=on_startup)
+    vk.task_manager.close() # close event loop manually
