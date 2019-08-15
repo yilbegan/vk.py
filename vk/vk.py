@@ -47,7 +47,13 @@ logger = logging.getLogger(__name__)
 
 
 class VK(ContextInstanceMixin):
-    def __init__(self, access_token: str, *, loop: AbstractEventLoop = None, client: ClientSession = None):
+    def __init__(
+        self,
+        access_token: str,
+        *,
+        loop: AbstractEventLoop = None,
+        client: ClientSession = None,
+    ):
 
         """
 
@@ -57,13 +63,16 @@ class VK(ContextInstanceMixin):
         """
         self.access_token = access_token
         self.loop = loop if loop is not None else asyncio.get_event_loop()
-        self.client = client if client is not None else ClientSession(json_serialize = orjson.dumps)
+        self.client = (
+            client if client is not None else ClientSession(json_serialize=orjson.dumps)
+        )
         self.api_version = API_VERSION
 
         self.api_error_handler = APIErrorHandler(self)
 
-
-    async def _api_request(self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False):
+    async def _api_request(
+        self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
+    ):
         """
 
         :param method_name: method of name when need to call
@@ -75,9 +84,9 @@ class VK(ContextInstanceMixin):
             params = {}
 
         params.update({"v": self.api_version, "access_token": self.access_token})
-        async with self.client.post(API_LINK + method_name, params = params) as response:
+        async with self.client.post(API_LINK + method_name, params=params) as response:
             if response.status == 200:
-                json: typing.Dict = await response.json(loads = orjson.loads)
+                json: typing.Dict = await response.json(loads=orjson.loads)
                 logger.debug(f"Response from API: {json}")
                 if "error" in json:
                     return await self.api_error_handler.error_handle(json)
@@ -95,7 +104,7 @@ class VK(ContextInstanceMixin):
         :param params:
         :return:
         """
-        return await self._api_request(method_name = method_name, params = params)
+        return await self._api_request(method_name=method_name, params=params)
 
     def get_api(self):
         """

@@ -104,5 +104,3 @@ class SetTags(SimpleResponse):
 
 class TrackPageInteraction(SimpleResponse):
     pass
-
-

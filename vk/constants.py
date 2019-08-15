@@ -30,4 +30,4 @@ File which contains all constants of project.
 
 API_VERSION: str = "5.101"  # current api version https://vk.com/dev/versions
 
-API_LINK: str = "https://api.vk.com/method/" # link to access API
+API_LINK: str = "https://api.vk.com/method/"  # link to access API

@@ -71,5 +71,3 @@ class RestoreComment(SimpleResponse):
 
 class UnfixTopic(SimpleResponse):
     pass
-
-

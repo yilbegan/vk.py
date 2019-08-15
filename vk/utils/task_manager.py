@@ -12,6 +12,7 @@ class TaskManager:
     """
     Task manager which present to user high-level API of asyncio operations (Less part :))
     """
+
     def __init__(self, loop: asyncio.AbstractEventLoop):
         self.tasks: list = []
         self.loop = loop
@@ -19,8 +20,10 @@ class TaskManager:
         self.lock: bool = False  # For raise Exceptions when user want add tasks to running loop.
 
     def run(
-        self, on_shutdown: typing.Callable = None, on_startup: typing.Callable = None,
-            asyncio_debug_mode: bool = False
+        self,
+        on_shutdown: typing.Callable = None,
+        on_startup: typing.Callable = None,
+        asyncio_debug_mode: bool = False,
     ):
         """
         Method which run event loop
@@ -40,7 +43,7 @@ class TaskManager:
             uvloop.install()
             logger.info("Loop started!")
             if asyncio_debug_mode:
-                self.loop.set_debug(enabled = True)
+                self.loop.set_debug(enabled=True)
             self.lock = True
             self.loop.run_until_complete(tasks)
         finally:
@@ -48,14 +51,12 @@ class TaskManager:
                 self.loop.run_until_complete(on_shutdown())
             self.lock = False
 
-
     def close(self):
         """
         Close event loop
         :return:
         """
         self.loop.close()
-
 
     def add_task(self, task: typing.Callable):
         """
@@ -73,4 +74,3 @@ class TaskManager:
                 raise RuntimeError("Unexpected task. Tasks may be only coroutine")
         else:
             raise RuntimeError("Loop already running. Adding tasks is impossible")
-

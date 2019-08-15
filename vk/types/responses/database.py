@@ -50,6 +50,7 @@ class GetCountriesById(BaseModel):
 class GetFaculties(GetCountries):
     pass
 
+
 class GetMetroStationsResponse(BaseModel):
     count: int = None
     items: typing.List[MetroStation] = None
@@ -77,5 +78,3 @@ class GetSchools(BaseModel):
 
 class GetUniversities(BaseModel):
     response: typing.List[GetCountriesResponse] = None
-
-

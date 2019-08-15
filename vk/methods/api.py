@@ -1,6 +1,7 @@
 from vk.methods import Messages, Account
 from vk.utils import ContextInstanceMixin
 
+
 class API(ContextInstanceMixin):
     def __init__(self, vk):
         self.vk = vk

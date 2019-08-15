@@ -6,6 +6,7 @@ import typing
 
 # https://vk.com/dev/objects/push_settings
 
+
 class NotificationType(Enum):
     msg = typing.List["on" or "off" or "no_sound" or "no_text"]
     chat = typing.List["on" or "off" or "no_sound" or "no_text"]

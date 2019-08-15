@@ -2,6 +2,7 @@ from ..base import BaseModel
 
 # returned from https://vk.com/dev/account.getActiveOffers
 
+
 class ActiveOffer(BaseModel):
     id: str = None
     title: str = None

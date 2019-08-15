@@ -72,13 +72,16 @@ class GetAppUsers(BaseModel):
 class GetByPhones(BaseModel):
     response: typing.List[User] = None
 
+
 class GetListsResponseItem(BaseModel):
     name: str = None
     id: int = None
 
+
 class GetListsResponse(BaseModel):
     count: int = None
     items: typing.List[GetListsResponseItem] = None
+
 
 class GetLists(BaseModel):
     response: GetListsResponse = None
@@ -95,9 +98,11 @@ class GetOnline(BaseModel):
 class GetRecent(BaseModel):
     response: typing.List[int] = None
 
+
 class GetRequestsItem(User):
     mutual: typing.Any = None
     track_code: str = None
+
 
 class GetRequestsResponse(BaseModel):
     count: int = None
@@ -119,5 +124,3 @@ class GetSuggestions(BaseModel):
 
 class Search(BaseModel):
     response: GetSuggestionsResponse = None
-
-

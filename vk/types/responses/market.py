@@ -1,8 +1,12 @@
 from .others import SimpleResponse
 from ..base import BaseModel
 
-from ..attachments.market import Market, MarketCategorySection,\
-    MarketPrice, MarketCategory
+from ..attachments.market import (
+    Market,
+    MarketCategorySection,
+    MarketPrice,
+    MarketCategory,
+)
 from ..attachments.market_album import MarketAlbum
 from ..user import User
 from ..attachments import Attachments
@@ -18,6 +22,7 @@ class AddResponse(BaseModel):
 
 class Add(BaseModel):
     response: AddResponse = None
+
 
 class AddAlbumResponse(BaseModel):
     market_album_id: int = None
@@ -76,6 +81,7 @@ class GetAlbumByIdResponse(BaseModel):
 class GetAlbumById(BaseModel):
     response: GetAlbumByIdResponse = None
 
+
 class GetAlbums(BaseModel):
     response: GetAlbumByIdResponse = None
 
@@ -83,10 +89,12 @@ class GetAlbums(BaseModel):
 class GetById(BaseModel):
     response: GetResponse = None
 
+
 class GetCategoriesResponseItem(BaseModel):
     id: int = None
     name: str = None
     section: MarketCategorySection = None
+
 
 class GetCategoriesResponse(BaseModel):
     count: int = None

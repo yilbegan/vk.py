@@ -22,8 +22,10 @@ class GetResponse(BaseModel):
     count: int = None
     items: typing.List[Document] = None
 
+
 class Get(BaseModel):
     response: GetResponse = None
+
 
 class GetById(BaseModel):
     response: typing.List[Document] = None
@@ -36,10 +38,12 @@ class GetMessagesUploadServerResponse(BaseModel):
 class GetMessagesUploadServer(BaseModel):
     response: GetMessagesUploadServerResponse = None
 
+
 class GetTypesItems(BaseModel):
     id: int = None
     name: str = None
     count: int = None
+
 
 class GetTypesResponse(BaseModel):
     count: int = None

@@ -43,7 +43,13 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.CreateChat(**r)
 
-    async def delete(self, message_ids: typing.List[int], spam: int = None, group_id: int = None, delete_for_all: int = None):
+    async def delete(
+        self,
+        message_ids: typing.List[int],
+        spam: int = None,
+        group_id: int = None,
+        delete_for_all: int = None,
+    ):
         """
 
         :param message_ids:
@@ -71,7 +77,9 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.DeleteChatPhoto(**r)
 
-    async def delete_conversation(self, peer_id: int, user_id: str = None, group_id: int = None):
+    async def delete_conversation(
+        self, peer_id: int, user_id: str = None, group_id: int = None
+    ):
         """
 
         :param peer_id:
@@ -90,7 +98,19 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.DenyMessagesFromGroup(**r)
 
-    async def edit(self, peer_id: int, message_id: int, message: str = None, lat: float = None, long: float = None, attachment: str = None, keep_forward_messages: int = None, keep_snippets: int = None, group_id: int = None, dont_parse_links: int = None):
+    async def edit(
+        self,
+        peer_id: int,
+        message_id: int,
+        message: str = None,
+        lat: float = None,
+        long: float = None,
+        attachment: str = None,
+        keep_forward_messages: int = None,
+        keep_snippets: int = None,
+        group_id: int = None,
+        dont_parse_links: int = None,
+    ):
         """
 
         :param peer_id:
@@ -110,7 +130,6 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.Edit(**r)
 
-
     async def edit_chat(self, chat_id: int, title: str):
         """
 
@@ -123,7 +142,14 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.EditChat(**r)
 
-    async def get_by_conversation_message_id(self, peer_id: int, conversation_message_ids: typing.List[int], extended: int = None, fields: typing.List[str] = None, group_id: int = None):
+    async def get_by_conversation_message_id(
+        self,
+        peer_id: int,
+        conversation_message_ids: typing.List[int],
+        extended: int = None,
+        fields: typing.List[str] = None,
+        group_id: int = None,
+    ):
         """
 
         :param peer_id:
@@ -142,7 +168,14 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetByConversationMessageId(**r)
 
-    async def get_by_id(self, message_ids: typing.List[int], preview_legth: int = None, extended: int = 1, fields: typing.List[str] = None, group_id: str = None):
+    async def get_by_id(
+        self,
+        message_ids: typing.List[int],
+        preview_legth: int = None,
+        extended: int = 1,
+        fields: typing.List[str] = None,
+        group_id: str = None,
+    ):
         """
 
         :param message_ids:
@@ -161,7 +194,13 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetById(**r)
 
-    async def get_chat(self, chat_id: int = None, chat_ids: typing.List[int] = None, fields: typing.List[str] = None, name_case: str = None):
+    async def get_chat(
+        self,
+        chat_id: int = None,
+        chat_ids: typing.List[int] = None,
+        fields: typing.List[str] = None,
+        name_case: str = None,
+    ):
         """
 
         :param chat_id:
@@ -179,7 +218,27 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetChat(**r)
 
-    async def send(self, user_id: int = None, random_id: int = 0, peer_id: int = None, domain: str = None, chat_id: int = None, user_ids: typing.List[int] = None, message: str = None, lat: float = None, long: float = None, attachment: str = None, reply_to: int = None, forward_messages: typing.List[int] = None, sticker_id: int = None, group_id: int = None, keyboard: dict = None, payload: str = None, dont_parse_links: int = None, disable_mentions: int = None):
+    async def send(
+        self,
+        user_id: int = None,
+        random_id: int = 0,
+        peer_id: int = None,
+        domain: str = None,
+        chat_id: int = None,
+        user_ids: typing.List[int] = None,
+        message: str = None,
+        lat: float = None,
+        long: float = None,
+        attachment: str = None,
+        reply_to: int = None,
+        forward_messages: typing.List[int] = None,
+        sticker_id: int = None,
+        group_id: int = None,
+        keyboard: dict = None,
+        payload: str = None,
+        dont_parse_links: int = None,
+        disable_mentions: int = None,
+    ):
         method = self.get_method_name(self.send)
         if user_ids:
             user_ids = self.list_to_str(user_ids)

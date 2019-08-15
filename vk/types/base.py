@@ -14,7 +14,6 @@ class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
     def __repr__(self):
         return "%s(%r)" % (self.__class__, self.dict())
 
-
     @property
     def vk(self):
         from vk import VK

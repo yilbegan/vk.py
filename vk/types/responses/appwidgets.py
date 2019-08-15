@@ -45,4 +45,3 @@ class SaveGroupImage(SaveAppImage):
 
 class Update(SimpleResponse):
     pass
-

@@ -12,5 +12,3 @@ class CheckPhone(SimpleResponse):
 class RestoreResponse(BaseModel):
     success: int = None
     sid: typing.Any = None
-
-

@@ -33,7 +33,6 @@ class GetUploadURL(BaseModel):
 class List(BaseModel):
     response: typing.List = None
 
+
 class Update(SimpleResponse):
     pass
-
-

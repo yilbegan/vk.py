@@ -1,8 +1,15 @@
 from .others import SimpleResponse
 from ..base import BaseModel
 
-from ..additional import ActiveOffer, Sex, BdateVisiblity, \
-    Country, City, NameRequest, NotificationSettings
+from ..additional import (
+    ActiveOffer,
+    Sex,
+    BdateVisiblity,
+    Country,
+    City,
+    NameRequest,
+    NotificationSettings,
+)
 from ..user import User, UserRelation
 from ..community import Community
 
@@ -155,7 +162,3 @@ class Unban(SimpleResponse):
 
 class UnregisterDevice(SimpleResponse):
     pass
-
-
-
-

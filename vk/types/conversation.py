@@ -6,9 +6,11 @@ from .attachments import Photo
 
 import typing
 
+
 class ConversationCanWrite(BaseModel):
     allowed: bool = None
     reason: int = None
+
 
 class Peer(BaseModel):
     id: int = None
@@ -35,4 +37,3 @@ class Conversation(BaseModel):
     push_settings: ChatPushSettings = None
     can_write: ConversationCanWrite = None
     chat_settings: ConversationChatSettings = None
-

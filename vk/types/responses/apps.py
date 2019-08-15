@@ -16,6 +16,7 @@ class GetResponse(BaseModel):
     count: int = None
     items: typing.List[Application] = None
 
+
 class Get(BaseModel):
     response: GetResponse = None
 
@@ -52,4 +53,3 @@ class GetScore(BaseModel):
 
 class SendRequest(SimpleResponse):
     pass
-
