@@ -110,3 +110,52 @@ class GetPushSettingsResponse(BaseModel):
 
 class GetPushSettings(BaseModel):
     response: GetPushSettingsResponse = None
+
+
+class RegisterDevice(SimpleResponse):
+    pass
+
+
+class SaveProfileInfoResponse(BaseModel):
+    changed: int = None
+    name_request: NameRequest = None
+
+
+class SaveProfileInfo(BaseModel):
+    response: SaveProfileInfoResponse = None
+
+
+class SetInfo(SimpleResponse):
+    pass
+
+
+class SetNameInMenu(SimpleResponse):
+    pass
+
+
+class SetOffline(SimpleResponse):
+    pass
+
+
+class SetOnline(SimpleResponse):
+    pass
+
+
+class SetPushSettings(SimpleResponse):
+    pass
+
+
+class SetSilenceMode(SimpleResponse):
+    pass
+
+
+class Unban(SimpleResponse):
+    pass
+
+
+class UnregisterDevice(SimpleResponse):
+    pass
+
+
+
+

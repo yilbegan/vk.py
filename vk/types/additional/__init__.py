@@ -13,3 +13,4 @@ from .bdate import BdateVisiblity
 from .country import Country
 from .name_request import NameRequest
 from .push_settings import NotificationSettings
+from .metro_station import MetroStation
