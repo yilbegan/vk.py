@@ -82,7 +82,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         if not self.runned:
             await self._prepare_longpoll()
             self.runned = True
-            logger.debug("Polling started!")
+            logger.info("Polling started!")
         while True:
             event = await self.listen()
             if event:

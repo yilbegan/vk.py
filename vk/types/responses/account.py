@@ -1,15 +1,7 @@
 from .others import SimpleResponse
 from ..base import BaseModel
 
-from ..additional import (
-    ActiveOffer,
-    Sex,
-    BdateVisiblity,
-    Country,
-    City,
-    NameRequest,
-    NotificationSettings,
-)
+from ..additional import ActiveOffer, Sex, BdateVisiblity, Country, City, NameRequest
 from ..user import User, UserRelation
 from ..community import Community
 
@@ -112,7 +104,7 @@ class GetPushSettingsResponse(BaseModel):
     disabled: int = None
     disabled_until: int = None
     conversations: list = None
-    settings: NotificationSettings = None
+    settings: typing.Any = None
 
 
 class GetPushSettings(BaseModel):

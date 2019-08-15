@@ -63,3 +63,15 @@ class Other(Enum):
     GROUP_OFFICERS_EDIT = "group_officers_edit"
     GROUP_CHANGE_SETTINGS = "group_change_settings"
     GROUP_CHANGE_PHOTO = "group_change_photo"
+
+
+class Event(Enum):
+    MESSAGES = Message
+    PHOTO = Photo
+    AUDIO = Audio
+    VIDEO = Video
+    WALL = Wall
+    BOARD = Board
+    MARKET = Market
+    USERS = Users
+    OTHER = Other

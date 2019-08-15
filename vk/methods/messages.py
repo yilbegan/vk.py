@@ -220,9 +220,9 @@ class Messages(BaseMethod):
 
     async def send(
         self,
-        user_id: int = None,
-        random_id: int = 0,
         peer_id: int = None,
+        random_id: int = 0,
+        user_id: int = None,
         domain: str = None,
         chat_id: int = None,
         user_ids: typing.List[int] = None,
