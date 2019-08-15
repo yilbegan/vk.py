@@ -8,6 +8,8 @@ import typing
 class ChatPushSettings(BaseModel):
     sound: int = None
     disabled_until: int = None
+    disabled_forever: int = None
+    no_sound: bool = None
 
 
 class Chat(BaseModel):

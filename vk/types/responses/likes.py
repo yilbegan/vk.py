@@ -33,4 +33,3 @@ class IsLikedResponse(BaseModel):
 
 class IsLiked(BaseModel):
     response: IsLikedResponse = None
-
