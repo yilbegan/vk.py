@@ -38,5 +38,6 @@ async def run():
 
 
 if __name__ == "__main__":
+    dp.middleware_manager.setup(MyMiddleware()) # setup middleware
     task_manager.add_task(run)
     task_manager.run()
