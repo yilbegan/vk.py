@@ -48,5 +48,18 @@ class Message(BaseModel):
     action: MessageAction = None
     fwd_messages: typing.List["Message"] = None
 
+    async def reply(self, message: str, attachment: str = None):
+        return await self.api.messages.send(
+            message=message, peer_id=self.peer_id, attachment=attachment
+        )
+
+    async def answer(self, message: str, attachment: str = None):
+        return await self.api.messages.send(
+            message=message,
+            peer_id=self.peer_id,
+            attachment=attachment,
+            reply_to=self.id,
+        )
+
 
 Message.update_forward_refs()

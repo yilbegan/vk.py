@@ -64,7 +64,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
             logger.debug(f"Get updates from polling: {resp['updates']}")
             return resp
 
-    async def listen(self) -> dict:
+    async def listen(self) -> list:
         """
 
         :return: 1 event
@@ -72,7 +72,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
         self.ts = updates["ts"]
         if updates["updates"]:
-            return updates["updates"][0]
+            return updates["updates"]
 
     async def run(self) -> dict:
         """
@@ -86,4 +86,4 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         while True:
             event = await self.listen()
             if event:
-                yield event
+                yield event[0]

@@ -111,7 +111,9 @@ class VK(ContextInstanceMixin):
         Get API class
         :return:
         """
-        return API(self)
+        api = API(self)
+        API.set_current(api)
+        return api
 
     async def close(self):
         """

@@ -24,3 +24,6 @@ class WallComment(BaseModel):
     attachments: Attachments = None
     parents_stack: typing.List[int] = None
     thread: WallCommentThread = None
+
+
+WallCommentThread.update_forward_refs()
