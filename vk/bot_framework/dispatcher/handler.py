@@ -14,10 +14,7 @@ class SkipHandler(Exception):
 
 class Handler:
     def __init__(
-        self,
-        event_type: Event,
-        handler: typing.Callable,
-        rules: typing.List[BaseRule],
+        self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
     ):
         self.event_type: Event = event_type
         self.handler: typing.Callable = handler

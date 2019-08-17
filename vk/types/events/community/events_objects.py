@@ -146,4 +146,3 @@ class GroupChangeSettings(BaseModel):
 class GroupChangePhoto(BaseModel):
     user_id: int = None
     photo: Photo = None
-

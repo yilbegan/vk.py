@@ -194,4 +194,3 @@ class GroupChangePhoto(BaseEvent):
 
 
 WallReplyNew.update_forward_refs()
-

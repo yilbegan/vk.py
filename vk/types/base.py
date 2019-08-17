@@ -15,7 +15,7 @@ class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
     def __repr__(self):
         return "%s(%r)" % (self.__class__, self.dict())
 
-    @pydantic.validator("*", check_fields = False, pre = True)
+    @pydantic.validator("*", check_fields=False, pre=True)
     def enum_validate(cls, v):
         if isinstance(v, Enum):
             return v.value

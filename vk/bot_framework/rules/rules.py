@@ -24,7 +24,6 @@ class Text(BaseRule):
 
 
 class Commands(BaseRule):
-
     def __init__(self, commands: typing.List[str]):
         self.commands = commands
         self.prefix = "/"

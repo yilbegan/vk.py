@@ -6,7 +6,7 @@ from vk import types
 
 import logging
 
-logging.basicConfig(level = "INFO")
+logging.basicConfig(level="INFO")
 
 bot_token = "token"
 vk = VK(bot_token)
@@ -24,6 +24,7 @@ class RegistrationMiddleware(BaseMiddleware):
     """
     Register users in bot.
     """
+
     async def pre_process_event(self, event):
         if event["type"] == "message_new":
             from_id = event["object"]["from_id"]
@@ -38,6 +39,7 @@ class IsAdmin(BaseRule):
     """
     Check admin rights of user.
     """
+
     def __init__(self, is_admin: bool):
         self.is_admin: bool = is_admin
 
@@ -74,7 +76,7 @@ async def run():
 
 
 if __name__ == "__main__":
-    dp.middleware_manager.setup(RegistrationMiddleware()) # setup middleware
+    dp.middleware_manager.setup(RegistrationMiddleware())  # setup middleware
 
     task_manager.add_task(run)
     task_manager.run()

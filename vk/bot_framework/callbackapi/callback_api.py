@@ -7,7 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 class CallbackAPIHandler(web.View):
-
     async def get(self):
         raise web.HTTPForbidden()
 

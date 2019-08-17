@@ -34,7 +34,9 @@ class Dispatcher(ContextInstanceMixin):
         handler = Handler(event_type, coro, rules)
         self.message_handlers.append(handler)
 
-    def message_handler(self, *rules, commands: typing.List[str] = None, text: str = None):
+    def message_handler(
+        self, *rules, commands: typing.List[str] = None, text: str = None
+    ):
         def decorator(coro: typing.Callable):
             primitive_rules: typing.List = []
             if commands:
@@ -46,7 +48,9 @@ class Dispatcher(ContextInstanceMixin):
 
         return decorator
 
-    def register_event_handler(self, coro: typing.Callable, event_type: Event, rules: typing.List):
+    def register_event_handler(
+        self, coro: typing.Callable, event_type: Event, rules: typing.List
+    ):
         handler = Handler(event_type, coro, rules=rules)
         self.event_handlers.append(handler)
 
