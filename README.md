@@ -24,6 +24,7 @@ pip install vk.py
 Simple example
 ```python
 from vk import VK
+from vk.utils.task_manager import TaskManager
 import logging
 
 logging.basicConfig(level="INFO")
@@ -34,8 +35,9 @@ async def status_get():
     print(resp)
 
 if __name__ == "__main__":
-    vk.task_manager.add_task(status_get)
-    vk.task_manager.run()
+    task_manager = TaskManager(vk.loop)
+    task_manager.add_task(status_get)
+    task_manager.run()
 
 ```
 
