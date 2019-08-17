@@ -5,18 +5,13 @@ import typing
 
 
 class Command(BaseRule):
-    def __init__(self, command: str, prefixes: typing.List[str] = None):
-        if not prefixes:
-            self.prefixes = ["/"]
-        else:
-            self.prefixes = prefixes
+    def __init__(self, command: str = None):
+        self.prefix = "/"
         self.command: str = command
 
     async def check(self, message: types.Message):
         text = message.text.lower()
-
-        for prefix in self.prefixes:
-            return f"{prefix}{self.command}" == text
+        return f"{self.prefix}{self.command}" == text
 
 
 class Text(BaseRule):
@@ -25,5 +20,20 @@ class Text(BaseRule):
 
     async def check(self, message: types.Message):
         text = message.text.lower()
-
         return text == self.text
+
+
+class Commands(BaseRule):
+
+    def __init__(self, commands: typing.List[str]):
+        self.commands = commands
+        self.prefix = "/"
+
+    async def check(self, message: types.Message):
+        text = message.text.lower()
+        _accepted = False
+        for command in self.commands:
+            if text == f"{self.prefix}{command}":
+                _accepted = True
+
+        return _accepted

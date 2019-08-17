@@ -8,7 +8,7 @@ import vk.types.events.community.events_objects as eventobj
 import asyncio
 import logging
 
-logging.basicConfig(level="DEBUG")
+logging.basicConfig(level="INFO")
 
 bot_token = "token"
 vk = VK(bot_token)

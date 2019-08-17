@@ -11,6 +11,8 @@ from vk.longpoll import BotLongPoll
 
 from ..callbackapi import callback_api
 
+from ..rules.rules import Commands, Text
+
 import typing
 import logging
 
@@ -32,9 +34,14 @@ class Dispatcher(ContextInstanceMixin):
         handler = Handler(event_type, coro, rules)
         self.message_handlers.append(handler)
 
-    def message_handler(self, *rules):
+    def message_handler(self, *rules, commands: typing.List[str] = None, text: str = None):
         def decorator(coro: typing.Callable):
-            self.register_message_handler(coro, list(rules))
+            primitive_rules: typing.List = []
+            if commands:
+                primitive_rules.append(Commands(commands))
+            if text:
+                primitive_rules.append(Text(text))
+            self.register_message_handler(coro, list(rules) + primitive_rules)
             return coro
 
         return decorator
