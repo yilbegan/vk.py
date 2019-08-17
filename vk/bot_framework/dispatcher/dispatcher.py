@@ -3,11 +3,13 @@ from vk.utils import ContextInstanceMixin
 from vk import VK
 from vk import types
 
+from vk.types.events.community.events_list import Event
+from vk.utils.get_event import get_event_object
+
 from .handler import Handler
 from vk.longpoll import BotLongPoll
 
-from vk.types.events.community.events_list import Event
-from vk.types.events.community import event as eventobj
+from ..callbackapi import callback_api
 
 import typing
 import logging
@@ -37,11 +39,9 @@ class Dispatcher(ContextInstanceMixin):
 
         return decorator
 
-
     def register_event_handler(self, coro: typing.Callable, event_type: Event, rules: typing.List):
         handler = Handler(event_type, coro, rules=rules)
         self.event_handlers.append(handler)
-
 
     def event_handler(self, event_type: Event, *rules):
         def decorator(coro: typing.Callable):
@@ -49,7 +49,6 @@ class Dispatcher(ContextInstanceMixin):
             return coro
 
         return decorator
-
 
     async def _process_event(self, event: dict):
         _skip_handler = await self.middleware_manager.trigger_pre_process_middlewares(
@@ -63,11 +62,11 @@ class Dispatcher(ContextInstanceMixin):
                         message = types.Message(**event["object"])
                         await handler.execute_handler(message)
                     except Exception as e:
-                        logger.error(
-                            f"Error in message handler ({handler.handler.__name__.upper()}: {e}"
+                        logger.exception(
+                            f"Error in message handler ({handler.handler.__name__})"
                         )
             else:
-                ev = await self.get_event_object(event)
+                ev = await get_event_object(event)
                 for handler in self.event_handlers:
                     if handler.event_type.value == ev.type:
                         try:
@@ -83,120 +82,14 @@ class Dispatcher(ContextInstanceMixin):
         async for event in self.longpoll.run():
             await self._process_event(event)
 
+    def run_callback_api(self, host: str, port: int, confirmation_code: str, path: str):
+        """
 
-
-    async def get_event_object(self, event):
-        _event_type = Event(event["type"])
-
-        if _event_type is Event.MESSAGE_NEW:
-            ev = eventobj.MessageNew(**event)
-
-        elif _event_type is Event.MESSAGE_REPLY:
-            ev = eventobj.MessageReply(**event)
-
-        elif _event_type is Event.MESSAGE_ALLOW:
-            ev = eventobj.MessageAllow(**event)
-
-        elif _event_type is Event.MESSAGES_DENY:
-            ev = eventobj.MessageDeny(**event)
-
-        elif _event_type is Event.PHOTO_NEW:
-            ev = eventobj.PhotoNew(**event)
-
-        elif _event_type is Event.PHOTO_COMMENT_NEW:
-            ev = eventobj.PhotoCommentNew(**event)
-
-        elif _event_type is Event.PHOTO_COMMENT_EDIT:
-            ev = eventobj.PhotoCommentEdit(**event)
-
-        elif _event_type is Event.PHOTO_COMMENT_RESTORE:
-            ev = eventobj.PhotoCommentRestore(**event)
-
-        elif _event_type is Event.PHOTO_COMMENT_DELETE:
-            ev = eventobj.PhotoCommentDelete(**event)
-
-        elif _event_type is Event.AUDIO_NEW:
-            ev = eventobj.AudioNew(**event)
-
-        elif _event_type is Event.VIDEO_NEW:
-            ev = eventobj.VideoNew(**event)
-
-        elif _event_type is Event.VIDEO_COMMENT_NEW:
-            ev = eventobj.VideoCommentNew(**event)
-
-        elif _event_type is Event.VIDEO_COMMENT_EDIT:
-            ev = eventobj.VideoCommentEdit(**event)
-
-        elif _event_type is Event.VIDEO_COMMENT_RESTORE:
-            ev = eventobj.VideoCommentRestore(**event)
-
-        elif _event_type is Event.VIDEO_COMMENT_DELETE:
-            ev = eventobj.VideoCommentDelete(**event)
-
-        elif _event_type is Event.WALL_POST_NEW:
-            ev = eventobj.WallPostNew(**event)
-
-        elif _event_type is Event.WALL_REPOST:
-            ev = eventobj.WallRepost(**event)
-
-        elif _event_type is Event.WALL_REPLY_NEW:
-            ev = eventobj.WallReplyNew(**event)
-
-        elif _event_type is Event.WALL_REPLY_EDIT:
-            ev = eventobj.WallReplyEdit(**event)
-
-        elif _event_type is Event.WALL_REPLY_RESTORE:
-            ev = eventobj.WallReplyRestore(**event)
-
-        elif _event_type is Event.WALL_REPLY_DELETE:
-            ev = eventobj.WallReplyDelete(**event)
-
-        elif _event_type is Event.BOARD_POST_NEW:
-            ev = eventobj.BoardPostNew(**event)
-
-        elif _event_type is Event.BOARD_POST_EDIT:
-            ev = eventobj.BoardPostEdit(**event)
-
-        elif _event_type is Event.BOARD_POST_RESTORE:
-            ev = eventobj.BoardPostRestore(**event)
-
-        elif _event_type is Event.BOARD_POST_DELETE:
-            ev = eventobj.BoardPostDelete(**event)
-
-        elif _event_type is Event.MARKET_COMMENT_NEW:
-            ev = eventobj.MarketCommentNew(**event)
-
-        elif _event_type is Event.MARKET_COMMENT_EDIT:
-            ev = eventobj.MarketCommentEdit(**event)
-
-        elif _event_type is Event.MARKET_COMMENT_RESTORE:
-            ev = eventobj.MarketCommentRestore(**event)
-
-        elif _event_type is Event.MARKET_COMMENT_DELETE:
-            ev = eventobj.MarketCommentDelete(**event)
-
-        elif _event_type is Event.GROUP_LEAVE:
-            ev = eventobj.GroupLeave(**event)
-
-        elif _event_type is Event.GROUP_JOIN:
-            ev = eventobj.GroupJoin(**event)
-
-        elif _event_type is Event.USER_BLOCK:
-            ev = eventobj.UserBlock(**event)
-
-        elif _event_type is Event.USER_UNBLOCK:
-            ev = eventobj.UserUnblock(**event)
-
-        elif _event_type is Event.POLL_VOTE_NEW:
-            ev = eventobj.PollVoteNew(**event)
-
-        elif _event_type is Event.GROUP_OFFICERS_EDIT:
-            ev = eventobj.GroupOfficersEdit(**event)
-
-        elif _event_type is Event.GROUP_CHANGE_SETTINGS:
-            ev = eventobj.GroupChangeSettings(**event)
-
-        elif _event_type is Event.GROUP_CHANGE_PHOTO:
-            ev = eventobj.GroupChangePhoto(**event)
-
-        return ev
+        :param host: Host string. Example: "0.0.0.0"
+        :param port: port
+        :param confirmation_code: callback api confirmation code
+        :param path: url where VK send requests. Example: "my_bot"
+        :return:
+        """
+        app = callback_api.get_app(self, confirmation_code)
+        callback_api.run_app(app, host, port, path)
