@@ -93,9 +93,10 @@ class Dispatcher(ContextInstanceMixin):
 
     async def _process_events(self, events: typing.List[dict]):
         for event in events:
-            await self._process_event(event)
+            self.vk.loop.create_task(self._process_event(event))
 
     async def run_polling(self):
+        VK.set_current(self.vk)
         await self.longpoll._prepare_longpoll()
         while True:
             events = await self.longpoll.listen()

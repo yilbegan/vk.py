@@ -4,6 +4,7 @@ from vk import types
 
 import typing
 import logging
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -12,9 +13,10 @@ class SkipHandler(Exception):
     pass
 
 
+
 class Handler:
     def __init__(
-        self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
+            self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
     ):
         self.event_type: Event = event_type
         self.handler: typing.Callable = handler
@@ -32,6 +34,5 @@ class Handler:
 
             if _execute:
                 await self.handler(*args)
-
         else:
             await self.handler(*args)
