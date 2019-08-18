@@ -84,6 +84,6 @@ class BotLongPoll(mixins.ContextInstanceMixin):
             self.runned = True
             logger.info("Polling started!")
         while True:
-            event = await self.listen()
-            if event:
-                yield event[0]
+            events = await self.listen()
+            if events:
+                yield events[0]

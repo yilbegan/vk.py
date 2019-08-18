@@ -1,4 +1,5 @@
 from vk.types.events.community import event as eventobj
+from vk.types.events.community.events_list import Event
 
 
 async def get_event_object(event):

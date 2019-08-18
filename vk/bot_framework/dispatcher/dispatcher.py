@@ -72,6 +72,7 @@ class Dispatcher(ContextInstanceMixin):
                     try:
                         message = types.Message(**event["object"])
                         await handler.execute_handler(message)
+                        break
                     except Exception as e:
                         logger.exception(
                             f"Error in message handler ({handler.handler.__name__})"
@@ -81,17 +82,25 @@ class Dispatcher(ContextInstanceMixin):
                 for handler in self.event_handlers:
                     if handler.event_type.value == ev.type:
                         try:
-                            await handler.execute_handler(ev)
+                            await handler.execute_handler(ev.object)
+                            break
                         except Exception as e:
-                            logger.error(
-                                f"Error in message handler ({handler.handler.__name__.upper()}: {e}"
+                            logger.exception(
+                                f"Error in message handler ({handler.handler.__name__}):"
                             )
 
         await self.middleware_manager.trigger_post_process_middlewares()
 
-    async def run_polling(self):
-        async for event in self.longpoll.run():
+    async def _process_events(self, events: typing.List[dict]):
+        for event in events:
             await self._process_event(event)
+
+    async def run_polling(self):
+        await self.longpoll._prepare_longpoll()
+        while True:
+            events = await self.longpoll.listen()
+            if events:
+                await self._process_events(events)
 
     def run_callback_api(self, host: str, port: int, confirmation_code: str, path: str):
         """

@@ -3,6 +3,7 @@ from .attachments import Attachments
 
 import typing
 
+
 # https://vk.com/dev/objects/comment
 
 

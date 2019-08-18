@@ -3,6 +3,10 @@ from vk import types
 
 import typing
 
+"""
+Built-in rules.
+"""
+
 
 class Command(BaseRule):
     def __init__(self, command: str = None):

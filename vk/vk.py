@@ -104,6 +104,7 @@ class VK(ContextInstanceMixin):
         :param params:
         :return:
         """
+        params = {k: v for k, v in params.items() if v is not None}
         return await self._api_request(method_name=method_name, params=params)
 
     def get_api(self):
