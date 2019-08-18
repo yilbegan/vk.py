@@ -17,10 +17,12 @@ class CallbackAPIHandler(web.View):
             raise web.HTTPForbidden()
 
         if type == "confirmation":
+            logger.debug("OK Response sended!")
             return web.Response(text=await self.confirmation_handle())
 
         else:
             await self.process_event(event)
+            logger.debug("OK Response sended!")
             return web.Response(text="ok")
 
     async def confirmation_handle(self):
@@ -28,7 +30,9 @@ class CallbackAPIHandler(web.View):
         return conf_code
 
     async def process_event(self, event):
-        await self.request.app["dp"]._process_event(event)
+        events = []
+        events.append(event)
+        await self.request.app["dp"]._process_events(events)
 
 
 def get_app(dp, confirmation_code: str):

@@ -21,82 +21,82 @@ class BaseEvent(BaseModel):
 
 
 class MessageNew(BaseEvent):
-    type: events.MESSAGE_NEW = None
+    type: str = None
     object: Message = None
 
 
 class MessageReply(MessageNew):
-    type: events.MESSAGE_REPLY = None
+    type: str = None
 
 
 class MessageAllow(BaseEvent):
-    type: events.MESSAGE_ALLOW = None
+    type: str = None
     object: EventsObjects.MessageAllow = None
 
 
 class MessageDeny(BaseEvent):
-    type: events.MESSAGES_DENY = None
+    type: str = None
     object: EventsObjects.MessageAllow = None
 
 
 class PhotoNew(BaseEvent):
-    type: events.PHOTO_NEW = None
+    type: str = None
     object: Photo = None
 
 
 class PhotoCommentNew(BaseEvent):
-    type: events.PHOTO_COMMENT_NEW = None
+    type: str = None
     object: EventsObjects.PhotoCommentNew = None
 
 
 class PhotoCommentEdit(PhotoCommentNew):
-    type: events.PHOTO_COMMENT_EDIT = None
+    type: str = None
 
 
 class PhotoCommentRestore(PhotoCommentNew):
-    type: events.PHOTO_COMMENT_RESTORE = None
+    type: str = None
 
 
 class PhotoCommentDelete(BaseEvent):
-    type: events.PHOTO_COMMENT_DELETE = None
+    type: str = None
     object: EventsObjects.PhotoCommentDelete = None
 
 
 class AudioNew(BaseEvent):
-    type: events.AUDIO_NEW = None
+    type: str = None
     object: Audio = None
 
 
 class VideoNew(BaseEvent):
-    type: events.VIDEO_NEW = None
+    type: str = None
     object: Video = None
 
 
 class VideoCommentNew(BaseEvent):
-    type: events.VIDEO_COMMENT_NEW = None
+    type: str = None
     object: EventsObjects.VideoCommentNew = None
 
 
 class VideoCommentEdit(VideoCommentNew):
-    type: events.VIDEO_COMMENT_EDIT = None
+    type: str = None
 
 
 class VideoCommentRestore(VideoCommentNew):
-    type: events.VIDEO_COMMENT_RESTORE = None
+    type: str = None
 
 
 class VideoCommentDelete(BaseEvent):
-    type: events.VIDEO_COMMENT_DELETE = None
+    type: str = None
     object: EventsObjects.VideoCommentDelete = None
 
 
 class WallPostNew(BaseEvent):
-    type: events.WALL_POST_NEW = None
+    type: str = None
     object: WallPost = None
 
 
 class WallRepost(WallPostNew):
-    type: events.WALL_REPOST = None
+    type: str = None
 
 
 class WallReplyNew(BaseEvent):
@@ -105,92 +105,135 @@ class WallReplyNew(BaseEvent):
 
 
 class WallReplyEdit(WallReplyNew):
-    type: events.WALL_REPLY_EDIT = None
+    type: str = None
 
 
 class WallReplyRestore(WallReplyNew):
-    type: events.WALL_REPLY_RESTORE = None
+    type: str = None
 
 
 class WallReplyDelete(BaseEvent):
-    type: events.WALL_REPLY_DELETE = None
+    type: str = None
     object: EventsObjects.WallReplyDelete = None
 
 
 class BoardPostNew(BaseEvent):
-    type: events.BOARD_POST_NEW = None
+    type: str = None
     object: EventsObjects.BoardPostNew = None
 
 
 class BoardPostEdit(BoardPostNew):
-    type: events.BOARD_POST_EDIT = None
+    type: str = None
 
 
 class BoardPostRestore(BoardPostNew):
-    type: events.BOARD_POST_RESTORE = None
+    type: str = None
 
 
 class BoardPostDelete(BaseEvent):
-    type: events.BOARD_POST_DELETE = None
+    type: str = None
     object: EventsObjects.BoardPostDelete = None
 
 
 class MarketCommentNew(BaseEvent):
-    type: events.MARKET_COMMENT_NEW = None
+    type: str = None
     object: EventsObjects.MarketCommentNew = None
 
 
 class MarketCommentEdit(MarketCommentNew):
-    type: events.MARKET_COMMENT_EDIT = None
+    type: str = None
 
 
 class MarketCommentRestore(MarketCommentNew):
-    type: events.MARKET_COMMENT_RESTORE = None
+    type: str = None
 
 
 class MarketCommentDelete(BaseEvent):
-    type: events.MARKET_COMMENT_DELETE = None
+    type: str = None
     object: EventsObjects.MarketCommentDelete = None
 
 
 class GroupLeave(BaseEvent):
-    type: events.GROUP_LEAVE = None
+    type: str = None
     object: EventsObjects.GroupLeave = None
 
 
 class GroupJoin(BaseEvent):
-    type: events.GROUP_JOIN = None
+    type: str = None
     object: EventsObjects.GroupJoin = None
 
 
 class UserBlock(BaseEvent):
-    type: events.USER_BLOCK = None
+    type: str = None
     object: EventsObjects.UserBlock = None
 
 
 class UserUnblock(BaseEvent):
-    type: events.USER_UNBLOCK = None
+    type: str = None
     object: EventsObjects.UserUnblock = None
 
 
 class PollVoteNew(BaseEvent):
-    type: events.POLL_VOTE_NEW = None
+    type: str= None
     object: EventsObjects.PollVoteNew = None
 
 
 class GroupOfficersEdit(BaseEvent):
-    type: events.GROUP_OFFICERS_EDIT = None
+    type: str = None
     object: EventsObjects.GroupOfficersEdit = None
 
 
 class GroupChangeSettings(BaseEvent):
-    type: events.GROUP_CHANGE_SETTINGS = None
+    type: str = None
     object: EventsObjects.GroupChangeSettings = None
 
 
 class GroupChangePhoto(BaseEvent):
-    type: events.GROUP_CHANGE_PHOTO = None
+    type: str = None
     object: EventsObjects.GroupChangePhoto = None
 
 
+Audio.update_forward_refs()
+AudioNew.update_forward_refs()
+BaseEvent.update_forward_refs()
+BaseModel.update_forward_refs()
+BoardPostDelete.update_forward_refs()
+BoardPostEdit.update_forward_refs()
+BoardPostNew.update_forward_refs()
+BoardPostRestore.update_forward_refs()
+GroupChangePhoto.update_forward_refs()
+GroupChangeSettings.update_forward_refs()
+GroupJoin.update_forward_refs()
+GroupLeave.update_forward_refs()
+GroupOfficersEdit.update_forward_refs()
+MarketCommentDelete.update_forward_refs()
+MarketCommentEdit.update_forward_refs()
+MarketCommentNew.update_forward_refs()
+MarketCommentRestore.update_forward_refs()
+Message.update_forward_refs()
+MessageAllow.update_forward_refs()
+MessageDeny.update_forward_refs()
+MessageNew.update_forward_refs()
+MessageReply.update_forward_refs()
+Photo.update_forward_refs()
+PhotoCommentDelete.update_forward_refs()
+PhotoCommentEdit.update_forward_refs()
+PhotoCommentNew.update_forward_refs()
+PhotoCommentRestore.update_forward_refs()
+PhotoNew.update_forward_refs()
+PollVoteNew.update_forward_refs()
+UserBlock.update_forward_refs()
+UserUnblock.update_forward_refs()
+Video.update_forward_refs()
+VideoCommentDelete.update_forward_refs()
+VideoCommentEdit.update_forward_refs()
+VideoCommentNew.update_forward_refs()
+VideoCommentRestore.update_forward_refs()
+VideoNew.update_forward_refs()
+WallPost.update_forward_refs()
+WallPostNew.update_forward_refs()
+WallReplyDelete.update_forward_refs()
+WallReplyEdit.update_forward_refs()
 WallReplyNew.update_forward_refs()
+WallReplyRestore.update_forward_refs()
+WallRepost.update_forward_refs()

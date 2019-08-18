@@ -87,7 +87,7 @@ class VK(ContextInstanceMixin):
         async with self.client.post(API_LINK + method_name, params=params) as response:
             if response.status == 200:
                 json: typing.Dict = await response.json(loads=orjson.loads)
-                logger.debug(f"Response from API: {json}")
+                logger.debug(f"Method {method_name} called. Response from API: {json}")
                 if "error" in json:
                     return await self.api_error_handler.error_handle(json)
 
