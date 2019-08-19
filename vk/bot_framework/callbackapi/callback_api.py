@@ -30,9 +30,7 @@ class CallbackAPIHandler(web.View):
         return conf_code
 
     async def process_event(self, event):
-        events = []
-        events.append(event)
-        await self.request.app["dp"]._process_events(events)
+        await self.request.app["dp"]._process_events([event])
 
 
 def get_app(dp, confirmation_code: str):

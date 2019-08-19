@@ -58,7 +58,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         :return:
         """
         async with self.vk.client.post(
-            f"{server}?act=a_check&key={key}&ts={ts}&wait=25"
+            f"{server}?act=a_check&key={key}&ts={ts}&wait=20"
         ) as response:
             resp = await response.json(loads=orjson.loads)
             logger.debug(f"Get updates from polling: {resp['updates']}")
