@@ -2,7 +2,10 @@ import asyncio
 import typing
 
 import logging
-import uvloop
+try:
+    import uvloop
+else:
+    uvloop = None
 
 from .auto_reload import _auto_reload
 
@@ -42,7 +45,8 @@ class TaskManager:
             if on_startup is not None:
                 self.loop.run_until_complete(on_startup())
             tasks = asyncio.gather(*tasks)
-            uvloop.install()
+            if uvloop:
+                uvloop.install()
             logger.info("Loop started!")
             if asyncio_debug_mode:
                 self.loop.set_debug(enabled=True)

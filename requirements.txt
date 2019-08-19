@@ -2,4 +2,3 @@ watchgod
 aiohttp
 pydantic
 orjson
-uvloop
