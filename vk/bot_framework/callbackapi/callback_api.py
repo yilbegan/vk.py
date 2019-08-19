@@ -1,7 +1,10 @@
 from aiohttp import web
 
 import logging
-import orjson
+try:
+    import orjson
+except ImportError:
+    import json as orjson
 
 logger = logging.getLogger(__name__)
 

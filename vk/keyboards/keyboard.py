@@ -2,7 +2,10 @@ from enum import Enum
 from ..exceptions import KeyboardException
 
 import logging
-import orjson
+try:
+    import orjson
+except ImportError:
+    import json as orjson
 
 import typing
 

@@ -2,7 +2,10 @@ from vk.utils import mixins
 from vk import VK
 
 import logging
-import orjson
+try:
+    import orjson
+except ImportError:
+    import json as orjson
 
 logger = logging.getLogger(__name__)
 

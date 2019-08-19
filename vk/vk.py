@@ -38,7 +38,10 @@ from vk.utils import ContextInstanceMixin
 from vk.methods import API
 
 import asyncio
-import orjson
+try:
+    import orjson
+except ImportError:
+    import json as orjson
 
 import typing
 import logging
