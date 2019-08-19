@@ -4,8 +4,9 @@ import typing
 import logging
 try:
     import uvloop
-else:
+except ImportError:
     uvloop = None
+
 
 from .auto_reload import _auto_reload
 
