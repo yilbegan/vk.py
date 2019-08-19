@@ -25,11 +25,12 @@ class RegistrationMiddleware(BaseMiddleware):
     Register users in bot.
     """
 
-    async def pre_process_event(self, event):
+    async def pre_process_event(self, event, data: dict):
         if event["type"] == "message_new":
             from_id = event["object"]["from_id"]
             if from_id not in USERS:
                 USERS[from_id] = "user"
+        return data
 
     async def post_process_event(self):
         pass
@@ -56,17 +57,17 @@ class IsAdmin(BaseRule):
 
 
 @dp.message_handler(rules.Command("start"))
-async def handle(message: types.Message):
+async def handle(message: types.Message, data: dict):
     await message.reply("Hello!")
 
 
 @dp.message_handler(rules.Command("admin"), IsAdmin(True))
-async def admin_panel(message: types.Message):
+async def admin_panel(message: types.Message, data: dict):
     await message.reply("Is admin panel!")
 
 
 @dp.message_handler(rules.Command("get"), IsAdmin(False))
-async def get_admin_rights(message: types.Message):
+async def get_admin_rights(message: types.Message, data: dict):
     USERS[message.from_id] = "admin"
     await message.reply("Successfully!")
 
@@ -76,7 +77,7 @@ async def run():
 
 
 if __name__ == "__main__":
-    dp.middleware_manager.setup(RegistrationMiddleware())  # setup middleware
+    dp.setup_middleware(RegistrationMiddleware())  # setup middleware
 
     task_manager.add_task(run)
     task_manager.run()

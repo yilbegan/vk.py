@@ -18,17 +18,18 @@ dp = Dispatcher(vk, gid)
 
 
 class MyMiddleware(BaseMiddleware):
-    async def pre_process_event(self, event):
+    async def pre_process_event(self, event, data: dict):
         print("Called before handlers!")
         if event["type"] != "message_new":
             raise SkipHandler
+        return data
 
     async def post_process_event(self):
         print("Called after handlers!")
 
 
 @dp.message_handler(rules.Command("start"))
-async def handle(message: types.Message):
+async def handle(message: types.Message, data: dict):
     await message.reply("Hello!")
 
 
@@ -37,6 +38,6 @@ async def run():
 
 
 if __name__ == "__main__":
-    dp.middleware_manager.setup(MyMiddleware())  # setup middleware
+    dp.setup_middleware(MyMiddleware())  # setup middleware
     task_manager.add_task(run)
     task_manager.run()

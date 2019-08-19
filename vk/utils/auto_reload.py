@@ -12,5 +12,5 @@ def restart():
 
 async def _auto_reload():
     async for changes in awatch('.'):
-        logging.info("Restarting...")
+        logging.info("Changes founded. Restarting...")
         restart()

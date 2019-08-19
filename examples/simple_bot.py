@@ -18,12 +18,12 @@ dp = Dispatcher(vk, gid)
 
 
 @dp.message_handler(commands=["help", "test", "start", "aoff"])
-async def handle(message: types.Message):
+async def handle(message: types.Message, data: dict):
     await message.reply("Test!")
 
 
 @dp.message_handler(text="hello")
-async def handle_event(message: types.Message):
+async def handle_event(message: types.Message, data: dict):
     await message.reply("Hello!")
 
 
@@ -33,4 +33,4 @@ async def run():
 
 if __name__ == "__main__":
     task_manager.add_task(run)
-    task_manager.run()
+    task_manager.run(auto_reload=True)

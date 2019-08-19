@@ -19,12 +19,12 @@ dp = Dispatcher(vk, gid)
 
 
 @dp.message_handler(rules.Command("start"))
-async def handle(message: types.Message):
+async def handle(message: types.Message, data: dict):
     await message.reply("Hello!")
 
 
 @dp.event_handler(Event.WALL_REPLY_NEW)
-async def handle_event(event: eventobj.WallReplyNew):
+async def handle_event(event: eventobj.WallReplyNew, data: dict):
     print(event)
     # something stuff...
 
