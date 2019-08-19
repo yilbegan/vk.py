@@ -174,7 +174,7 @@ class UserUnblock(BaseEvent):
 
 
 class PollVoteNew(BaseEvent):
-    type: str= None
+    type: str = None
     object: EventsObjects.PollVoteNew = None
 
 

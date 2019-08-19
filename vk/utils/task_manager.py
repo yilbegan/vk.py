@@ -4,6 +4,7 @@ import typing
 import logging
 import uvloop
 
+from .auto_reload import _auto_reload
 
 logger = logging.getLogger()
 
@@ -24,6 +25,7 @@ class TaskManager:
         on_shutdown: typing.Callable = None,
         on_startup: typing.Callable = None,
         asyncio_debug_mode: bool = False,
+        auto_reload: bool = False,
     ):
         """
         Method which run event loop
@@ -45,6 +47,8 @@ class TaskManager:
             if asyncio_debug_mode:
                 self.loop.set_debug(enabled=True)
             self.lock = True
+            if auto_reload:
+                self.loop.create_task(_auto_reload())
             self.loop.run_until_complete(tasks)
         finally:
             if on_shutdown is not None:
@@ -57,7 +61,6 @@ class TaskManager:
         :return:
         """
         self.loop.close()
-
     def add_task(self, task: typing.Callable):
         """
 
@@ -74,3 +77,12 @@ class TaskManager:
                 raise RuntimeError("Unexpected task. Tasks may be only coroutine")
         else:
             raise RuntimeError("Loop already running. Adding tasks is impossible")
+
+    def run_task(self, task: typing.Callable):
+        """
+        Add task to running loop
+        :param task:
+        :return:
+        """
+
+        self.loop.create_task(task())

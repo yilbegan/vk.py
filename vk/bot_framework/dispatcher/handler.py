@@ -13,20 +13,20 @@ class SkipHandler(Exception):
     pass
 
 
-
 class Handler:
     def __init__(
-            self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
+        self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
     ):
         self.event_type: Event = event_type
         self.handler: typing.Callable = handler
         self.rules: typing.List[BaseRule] = rules
 
     async def execute_handler(self, *args):
+        # args - (event, data)
         if self.rules:
             _execute = False
             for rule in self.rules:
-                result = await rule(*args)
+                result = await rule(args[0])
                 if not result:
                     _execute = False
                     break

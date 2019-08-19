@@ -20,19 +20,20 @@ class MiddlewareManager:
             raise RuntimeError("Middleware already configured!")
 
         self.middlewares.append(middleware)
+        logger.info(f"Middleware '{middleware.__class__.__name__}' successfully added!")
 
-    async def trigger_pre_process_middlewares(self, event):
+    async def trigger_pre_process_middlewares(self, event, data: dict):
         _skip_handler = False
         for middleware in self.middlewares:
             try:
-                await middleware.pre_process_event(event)
+                data = await middleware.pre_process_event(event, data)
             except SkipHandler:
                 logger.debug(
                     f"Middleware {middleware.__class__.__name__} skip handler!"
                 )
                 _skip_handler = True
 
-        return _skip_handler
+        return _skip_handler, data
 
     async def trigger_post_process_middlewares(self):
         for middleware in self.middlewares:
@@ -41,11 +42,12 @@ class MiddlewareManager:
 
 class AbstractMiddleware(ABC):
     @abstractmethod
-    async def pre_process_event(self, event):
+    async def pre_process_event(self, event, data: dict):
         """
         Called before checking filters and execute handler
-        :param args:
-        :return:
+        :param event:
+        :param data:
+        :return: data
         """
         pass
 

@@ -67,7 +67,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
     async def listen(self) -> list:
         """
 
-        :return: 1 event
+        :return: list of event
         """
         updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
         self.ts = updates["ts"]
@@ -77,7 +77,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
     async def run(self) -> dict:
         """
 
-        :return: update coming from VK
+        :return: last update coming from VK
         """
         if not self.runned:
             await self._prepare_longpoll()

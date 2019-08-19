@@ -50,14 +50,15 @@ class Message(BaseModel):
 
     async def reply(self, message: str, attachment: str = None):
         return await self.api.messages.send(
-            message=message, peer_id=self.peer_id, attachment=attachment, reply_to=self.id,
+            message=message,
+            peer_id=self.peer_id,
+            attachment=attachment,
+            reply_to=self.id,
         )
 
     async def answer(self, message: str, attachment: str = None):
         return await self.api.messages.send(
-            message=message,
-            peer_id=self.peer_id,
-            attachment=attachment,
+            message=message, peer_id=self.peer_id, attachment=attachment
         )
 
 
