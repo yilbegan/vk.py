@@ -1,6 +1,8 @@
 from vk.utils.mixins import ContextInstanceMixin
-
-import orjson
+try:
+    import orjson
+except ImportError:
+    import json as orjson
 import pydantic
 from enum import Enum
 
