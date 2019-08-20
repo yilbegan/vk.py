@@ -41,7 +41,7 @@ class Message(BaseModel):
     from_id: int = None
     text: str = None
     random_id: int = None
-    attachments: Attachments = None
+    attachments: typing.List[typing.Any] = None
     important: bool = None
     geo: Geo = None
     payload: str = None

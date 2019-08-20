@@ -2,12 +2,11 @@ import asyncio
 import typing
 
 import logging
+
 try:
     import uvloop
 except ImportError:
     uvloop = None
-
-
 
 from .auto_reload import _auto_reload
 
@@ -26,15 +25,16 @@ class TaskManager:
         self.lock: bool = False  # For raise Exceptions when user want add tasks to running loop.
 
     def run(
-        self,
-        on_shutdown: typing.Callable = None,
-        on_startup: typing.Callable = None,
-        asyncio_debug_mode: bool = False,
-        auto_reload: bool = False,
+            self,
+            on_shutdown: typing.Callable = None,
+            on_startup: typing.Callable = None,
+            asyncio_debug_mode: bool = False,
+            auto_reload: bool = False,
     ):
         """
         Method which run event loop
 
+        :param auto_reload: auto reload code when changes
         :param on_shutdown: coroutine which runned after complete tasks
         :param on_startup: coroutine which runned before run main tasks
         :param asyncio_debug_mode: asyncio debug mode state
@@ -63,10 +63,11 @@ class TaskManager:
 
     def close(self):
         """
-        Close event loop
+        Close event loop manually
         :return:
         """
         self.loop.close()
+
     def add_task(self, task: typing.Callable):
         """
 
