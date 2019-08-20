@@ -2,10 +2,7 @@ from enum import Enum
 from ..exceptions import KeyboardException
 
 import logging
-try:
-    import orjson
-except ImportError:
-    import json as orjson
+from vk.constants import JSON_LIBRARY
 
 import typing
 
@@ -152,7 +149,7 @@ class Keyboard:
 
         :return:
         """
-        return orjson.dumps(self.keyboard).decode("utf-8")
+        return JSON_LIBRARY.dumps(self.keyboard).decode("utf-8")
 
     @classmethod
     def get_empty_keyboard(cls) -> typing.AnyStr:

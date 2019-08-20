@@ -1,6 +1,5 @@
 from typing import List
 import typing
-import inspect
 
 
 class BaseMethod:

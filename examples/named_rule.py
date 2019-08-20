@@ -25,8 +25,9 @@ class Commands(NamedRule):
     key = "commands"
 
     """
-    Own implementaion of commands plugin.
+    Own implementaion of commands rule.
     """
+
     def __init__(self, commands):
         self.commands = commands
         self.prefix = "!"
@@ -41,10 +42,10 @@ class Commands(NamedRule):
         return _accepted
 
 
-dp.setup_rule(Commands) # bind
+dp.setup_rule(Commands)  # bind
 
 
-@dp.message_handler(commands=["t"]) # use
+@dp.message_handler(commands=["t"])  # use
 async def handle(message: types.Message, data: dict):
     await message.answer("hello!")
 

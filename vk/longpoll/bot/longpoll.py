@@ -2,10 +2,7 @@ from vk.utils import mixins
 from vk import VK
 
 import logging
-try:
-    import orjson
-except ImportError:
-    import json as orjson
+from vk.constants import JSON_LIBRARY
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +60,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         async with self.vk.client.post(
             f"{server}?act=a_check&key={key}&ts={ts}&wait=20"
         ) as response:
-            resp = await response.json(loads=orjson.loads)
+            resp = await response.json(loads=JSON_LIBRARY.loads)
             logger.debug(f"Get updates from polling: {resp['updates']}")
             return resp
 

@@ -1,10 +1,7 @@
 from aiohttp import web
 
 import logging
-try:
-    import orjson
-except ImportError:
-    import json as orjson
+from vk.constants import JSON_LIBRARY
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +11,7 @@ class CallbackAPIHandler(web.View):
         raise web.HTTPForbidden()
 
     async def post(self):
-        event = await self.request.json(loads=orjson.loads)
+        event = await self.request.json(loads=JSON_LIBRARY.loads)
         type = event.get("type")
         if not type:
             raise web.HTTPForbidden()

@@ -55,6 +55,9 @@ coverage.xml
 *.pot
 t.py
 t1.py
+t2.py
+t3.py
+.kutana/
 
 # Django stuff:
 *.log

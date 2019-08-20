@@ -38,10 +38,7 @@ from vk.utils import ContextInstanceMixin
 from vk.methods import API
 
 import asyncio
-try:
-    import orjson
-except ImportError:
-    import json as orjson
+from vk.constants import JSON_LIBRARY
 
 import typing
 import logging
@@ -67,7 +64,7 @@ class VK(ContextInstanceMixin):
         self.access_token = access_token
         self.loop = loop if loop is not None else asyncio.get_event_loop()
         self.client = (
-            client if client is not None else ClientSession(json_serialize=orjson.dumps)
+            client if client is not None else ClientSession(json_serialize=JSON_LIBRARY.dumps)
         )
         self.api_version = API_VERSION
 
@@ -89,7 +86,7 @@ class VK(ContextInstanceMixin):
         params.update({"v": self.api_version, "access_token": self.access_token})
         async with self.client.post(API_LINK + method_name, params=params) as response:
             if response.status == 200:
-                json: typing.Dict = await response.json(loads=orjson.loads)
+                json: typing.Dict = await response.json(loads=JSON_LIBRARY.loads)
                 logger.debug(f"Method {method_name} called. Response from API: {json}")
                 if "error" in json:
                     return await self.api_error_handler.error_handle(json)

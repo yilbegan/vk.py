@@ -1,24 +1,19 @@
 from vk import VK
-from vk.utils import TaskManager
-from vk.bot_framework import Dispatcher, rules
-from vk import types
+from vk.bot_framework import Dispatcher
 from vk.types.events.community.events_list import Event
 import vk.types.events.community.events_objects as eventobj
 
-import asyncio
+from vk import types
+
 import logging
 
 logging.basicConfig(level="INFO")
 
-bot_token = "token"
-vk = VK(bot_token)
-gid = 12345
-api = vk.get_api()
-
-dp = Dispatcher(vk, gid)
+vk = VK("TOKEN")
+dp = Dispatcher(vk, 123)
 
 
-@dp.message_handler(rules.Command("start"))
+@dp.message_handler(text="start")
 async def handle(message: types.Message, data: dict):
     await message.reply("Hello!")
 
