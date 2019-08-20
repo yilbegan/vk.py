@@ -58,7 +58,7 @@ class Attachment(BaseModel):
     poll: Poll = None
     page: Page = None
     album: Album = None
-    photos_list: typing.List[Photo] = None
+    photos_list: typing.List[Photo] = []
     market: Market = None
     market_album: MarketAlbum = None
     sticker: Sticker = None
