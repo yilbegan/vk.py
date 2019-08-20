@@ -1,5 +1,5 @@
 from .base import BaseModel
-from .attachments import Attachments, Geo
+from .attachments import Attachment, Geo
 from enum import Enum
 
 import typing
@@ -41,7 +41,7 @@ class Message(BaseModel):
     from_id: int = None
     text: str = None
     random_id: int = None
-    attachments: typing.List[typing.Any] = None
+    attachments: typing.List[Attachment] = None
     important: bool = None
     geo: Geo = None
     payload: str = None

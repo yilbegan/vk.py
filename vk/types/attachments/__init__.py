@@ -9,4 +9,4 @@ from .market import Market, MarketPriceCurrency
 from .repost import Repost
 from .geo import Geo
 
-from .attachments import Attachments
+from .attachments import Attachment, Attachments

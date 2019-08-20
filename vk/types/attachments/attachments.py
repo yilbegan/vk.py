@@ -1,4 +1,5 @@
 from enum import Enum
+from ..base import BaseModel
 from .photo import Photo, PostedPhoto
 from .video import Video
 from .audio import Audio
@@ -40,3 +41,8 @@ class Attachments(Enum):
     market_album = MarketAlbum
     sticker = Sticker
     pretty_cards = PrettyCards
+
+
+class Attachment(BaseModel):
+    type: str = None
+    object: Attachments = None
