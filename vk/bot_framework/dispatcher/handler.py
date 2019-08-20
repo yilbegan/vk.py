@@ -34,5 +34,8 @@ class Handler:
 
             if _execute:
                 await self.handler(*args)
+                return True
+
         else:
             await self.handler(*args)
+            return True

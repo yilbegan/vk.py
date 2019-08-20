@@ -81,8 +81,9 @@ class Dispatcher(ContextInstanceMixin):
             for handler in self._hanlders:
                 if handler.event_type.value == ev.type:
                     try:
-                        await handler.execute_handler(ev.object, data)
-                        break
+                        result = await handler.execute_handler(ev.object, data)
+                        if result:
+                            break
                     except Exception:
                         logger.exception(
                             f"Error in handler ({handler.handler.__name__}):"
