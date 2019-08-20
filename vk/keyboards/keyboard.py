@@ -68,8 +68,10 @@ class Keyboard:
         if payload is None:
             payload = ""
 
+        payload = JSON_LIBRARY.dumps(payload).decode("utf-8")
+
         if not isinstance(color, ButtonColor):
-            logger.warning("Invalid button color. Use 'PRIMARY'")
+            logger.warning("Invalid button color. Used 'PRIMARY'")
             color = ButtonColor.PRIMARY.value
         else:
             color = color.value
@@ -101,6 +103,8 @@ class Keyboard:
         if payload is None:
             payload = ""
 
+        payload = JSON_LIBRARY.dumps(payload).decode("utf-8")
+
         action = {"action": {"type": ButtonType.LOCATION.value, "payload": payload}}
 
         self._add_button(action)
@@ -115,6 +119,8 @@ class Keyboard:
 
         if payload is None:
             payload = ""
+
+        payload = JSON_LIBRARY.dumps(payload).decode("utf-8")
 
         action = {
             "action": {"type": ButtonType.VKPAY.value, "payload": payload, "hash": hash}
@@ -132,6 +138,8 @@ class Keyboard:
         """
         if payload is None:
             payload = ""
+
+        payload = JSON_LIBRARY.dumps(payload).decode("utf-8")
 
         action = {
             "action": {
@@ -157,4 +165,6 @@ class Keyboard:
 
         :return:
         """
-        return cls(one_time=True).get_keyboard()
+        keyboard = cls(one_time=True)
+        keyboard.keyboard['buttons'] = []
+        return keyboard.get_keyboard()

@@ -1,6 +1,6 @@
 from ..dispatcher.rule import NamedRule, BaseRule
 from vk.types.message import Action
-
+from vk.constants import JSON_LIBRARY
 
 from vk import types
 
@@ -61,7 +61,8 @@ class Payload(NamedRule):
     async def check(self, message: types.Message):
         payload = message.payload
         if payload:
-            if payload == self.payload:
+            payload = JSON_LIBRARY.loads(payload)
+            if payload["command"] == self.payload:
                 return True
 
 
