@@ -22,7 +22,7 @@ import typing
 # https://vk.com/dev/objects/attachments_w
 
 
-class Attachments(Enum):
+class Attachments(str, Enum):
     not_attachments = []
     photo = Photo
     posted_photo = PostedPhoto
@@ -45,4 +45,21 @@ class Attachments(Enum):
 
 class Attachment(BaseModel):
     type: str = None
-    object: Attachments = None
+    photo: Photo = None
+    posted_photo: PostedPhoto = None
+    video: Video = None
+    audio: Audio = None
+    document: Document = None
+    graffiti: Graffiti = None
+    link: Link = None
+    note: Note = None
+    app: App = None
+    poll: Poll = None
+    page: Page = None
+    album: Album = None
+    photos_list: typing.List[Photo] = None
+    market: Market = None
+    market_album: MarketAlbum = None
+    sticker: Sticker = None
+    pretty_cards: PrettyCards = None
+
