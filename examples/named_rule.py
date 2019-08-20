@@ -6,7 +6,6 @@ from vk.bot_framework.middlewares import SimpleLoggingMiddleware
 
 from vk import types
 
-import asyncio
 import logging
 
 logging.basicConfig(level="INFO")

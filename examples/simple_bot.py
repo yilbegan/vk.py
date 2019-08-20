@@ -3,7 +3,6 @@ from vk.utils import TaskManager
 from vk.bot_framework import Dispatcher
 from vk import types
 
-import asyncio
 import logging
 
 logging.basicConfig(level="INFO")
