@@ -58,7 +58,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
         :return:
         """
         async with self.vk.client.post(
-            f"{server}?act=a_check&key={key}&ts={ts}&wait=20"
+                f"{server}?act=a_check&key={key}&ts={ts}&wait=20"
         ) as response:
             resp = await response.json(loads=JSON_LIBRARY.loads)
             logger.debug(f"Get updates from polling: {resp['updates']}")
@@ -69,10 +69,13 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
         :return: list of event
         """
-        updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
-        self.ts = updates["ts"]
-        if updates["updates"]:
-            return updates["updates"]
+        try:
+            updates = await self.get_updates(key=self.key, server=self.server, ts=self.ts)
+            self.ts = updates["ts"]
+            if updates["updates"]:
+                return updates["updates"]
+        except:
+            logging.info("Longpoll have trouble...")
 
     async def run(self) -> dict:
         """

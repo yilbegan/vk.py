@@ -70,6 +70,8 @@ class VK(ContextInstanceMixin):
 
         self.api_error_handler = APIErrorHandler(self)
 
+        VK.set_current(self)
+
     async def _api_request(
         self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
     ):
