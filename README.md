@@ -4,14 +4,12 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/prostomarkeloff/vk.py.svg?branch=master)](https://travis-ci.org/prostomarkeloff/vk.py)
 
-> VK.py its a pretty and fully asynchronous API wrapper for VK API based on asyncio and aiohttp.
+> Extremely-fast Python 3.6+ toolkit for create applications work`s with VKAPI.
 
 
 
 ### 🏠 [Homepage](github.com/prostomarkeloff/vk.py)
 
-
-This library implemented all VK methods and types, based on PyDantic models.
 
 ## Install
 
@@ -49,14 +47,28 @@ if __name__ == "__main__":
 
 More examples [click](./examples)
 
-## Philosophy and Features
-- ***k the low level API. Set async/await in your code and it will work beautifully and quickly!
-  
-- All typed. All objects and responses which represents API (vk.com/dev) is in library. This helps IDE`s and help you save time.
-  
-- All fast. VK.py uses [orjson](https://github.com/ijl/orjson) as JSON serialize/deserealize driver and [uvloop](https://github.com/MagicStack/uvloop) as event loop. This help you write effective code.
+## Features
 
-- Easily debugging. All places in code logged. Set logger level as "DEBUG" and debug your code!
+- Rich high-level API.
+- Fully asynchronous. Based on asyncio and aiohttp.
+- Bot framework out of-the-box.
+- Fully typed. Thanks to Pydantic.
+- The fastest.
+
+
+## Performance
+The fastest Python library for access to VKAPI.
+
+- Accept and handle event from LongPoll API in bot framework (with sending a message to the user): lower than 0.1s 
+- Check 100 handlers and execute 100 filters in bot framework (without sending a message to the user): lower than 0.001s
+
+## Alternatives
+
+- Kutana. Bot engine for create bots in Telegram and VK.
+- VKBottle. Bot framework for develop bots in VK.
+- VK_API. Simple library for access to VKAPI.
+And many others library`s...
+
 ## Author
 
 👤 **prostomarkeloff**
