@@ -75,7 +75,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
             if updates["updates"]:
                 return updates["updates"]
         except:
-            logging.info("Longpoll have trouble...")
+            logger.info("Longpoll have trouble...")
 
     async def run(self) -> dict:
         """

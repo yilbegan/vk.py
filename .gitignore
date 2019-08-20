@@ -57,7 +57,7 @@ t.py
 t1.py
 t2.py
 t3.py
-.kutana/
+.test.txt
 
 # Django stuff:
 *.log
