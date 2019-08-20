@@ -1,4 +1,4 @@
-from ..dispatcher.rule import BaseRule
+from ..dispatcher.rule import NamedRule, BaseRule
 from vk import types
 
 import typing
@@ -18,7 +18,10 @@ class Command(BaseRule):
         return f"{self.prefix}{self.command}" == text
 
 
-class Text(BaseRule):
+class Text(NamedRule):
+
+    key = "text"
+
     def __init__(self, text: str):
         self.text: str = text
 
@@ -27,7 +30,10 @@ class Text(BaseRule):
         return text == self.text
 
 
-class Commands(BaseRule):
+class Commands(NamedRule):
+
+    key = "commands"
+
     def __init__(self, commands: typing.List[str]):
         self.commands = commands
         self.prefix = "/"
@@ -40,3 +46,20 @@ class Commands(BaseRule):
                 _accepted = True
 
         return _accepted
+
+
+class Payload(NamedRule):
+
+    key = "payload"
+
+    def __init__(self, payload: str):
+        self.payload = payload
+
+    async def check(self, message: types.Message):
+        payload = message.payload
+        if payload:
+            if payload == self.payload:
+                return True
+
+
+

@@ -10,15 +10,12 @@ from vk.longpoll import BotLongPoll
 
 from ..callbackapi import callback_api
 from .rule import RuleFactory
-from ..rules.rules import Commands, Text
-
+from vk.constants import DEFAULT_RULES
 
 import typing
 import logging
 
 logger = logging.getLogger(__name__)
-
-DEFAULT_RULES = {"commands": Commands, "text": Text}
 
 
 class Dispatcher(ContextInstanceMixin):
@@ -50,7 +47,7 @@ class Dispatcher(ContextInstanceMixin):
         return decorator
 
     def register_event_handler(
-        self, coro: typing.Callable, event_type: Event, rules: typing.List
+            self, coro: typing.Callable, event_type: Event, rules: typing.List
     ):
         handler = Handler(event_type, coro, rules=rules)
         self._register_handler(handler)

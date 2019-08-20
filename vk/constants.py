@@ -37,3 +37,8 @@ except:
     import json as orjson
 
 JSON_LIBRARY = orjson
+
+from vk.bot_framework.rules.rules import Commands, Text, Payload
+DEFAULT_RULES = {"commands": Commands, "text": Text, "payload": Payload}
+
+
