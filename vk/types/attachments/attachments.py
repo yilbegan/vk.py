@@ -15,6 +15,7 @@ from .market import Market
 from .market_album import MarketAlbum
 from .sticker import Sticker
 from .pretty_cards import PrettyCards
+from .audio_msg import AudioMsg
 
 import typing
 
@@ -62,4 +63,5 @@ class Attachment(BaseModel):
     market_album: MarketAlbum = None
     sticker: Sticker = None
     pretty_cards: PrettyCards = None
+    audio_message: AudioMsg = None
 
