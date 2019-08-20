@@ -10,7 +10,8 @@ from vk.longpoll import BotLongPoll
 
 from ..callbackapi import callback_api
 from .rule import RuleFactory
-from vk.constants import DEFAULT_RULES
+from vk.constants import default_rules
+
 
 import typing
 import logging
@@ -24,7 +25,7 @@ class Dispatcher(ContextInstanceMixin):
         self.group_id: int = group_id
         self._hanlders: typing.List[Handler] = []
         self._middleware_manager: MiddlewareManager = MiddlewareManager(self)
-        self._rule_factory: RuleFactory = RuleFactory(DEFAULT_RULES)
+        self._rule_factory: RuleFactory = RuleFactory(default_rules())
 
         self._longpoll = BotLongPoll(self.group_id, self.vk)
 

@@ -8,7 +8,7 @@ import typing
 # https://vk.com/dev/objects/message
 
 
-class Actions(Enum):
+class Action(Enum):
     chat_photo_update = "chat_photo_update"
     chat_photo_remove = "chat_photo_remove"
     chat_create = "chat_create"
@@ -27,7 +27,7 @@ class MessageActionPhoto(BaseModel):
 
 
 class MessageAction(BaseModel):
-    type: Actions = None
+    type: Action = None
     member_id: int = None
     text: str = None
     email: str = None

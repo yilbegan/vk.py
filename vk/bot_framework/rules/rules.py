@@ -1,4 +1,7 @@
 from ..dispatcher.rule import NamedRule, BaseRule
+from vk.types.message import Action
+
+
 from vk import types
 
 import typing
@@ -59,6 +62,21 @@ class Payload(NamedRule):
         payload = message.payload
         if payload:
             if payload == self.payload:
+                return True
+
+
+class ChatAction(NamedRule):
+
+    key = "chat_action"
+
+    def __init__(self, action: Action):
+        self.action = action
+
+    async def check(self, message: types.Message):
+        action = message.action.type
+        if action:
+            action = Action(action)
+            if action is self.action:
                 return True
 
 

@@ -38,7 +38,9 @@ except:
 
 JSON_LIBRARY = orjson
 
-from vk.bot_framework.rules.rules import Commands, Text, Payload
-DEFAULT_RULES = {"commands": Commands, "text": Text, "payload": Payload}
+def default_rules():
+    from vk.bot_framework.rules.rules import Commands, Text, Payload, ChatAction
+    DEFAULT_RULES = {"commands": Commands, "text": Text, "payload": Payload, "chat_action": ChatAction}
+    return DEFAULT_RULES
 
 
