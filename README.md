@@ -16,7 +16,7 @@ This library implemented all VK methods and types, based on PyDantic models.
 ## Install
 
 ```sh
-pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip —upgrade
+pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip --upgrade
 ```
 
 or (old version)
