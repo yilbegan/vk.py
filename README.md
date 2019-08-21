@@ -54,6 +54,7 @@ More examples [click](./examples)
 - Bot framework out of-the-box.
 - Fully typed. Thanks to Pydantic.
 - The fastest.
+- Compatible with PyPy.
 
 
 ## Performance
@@ -67,6 +68,7 @@ The fastest Python library for access to VKAPI.
 - Kutana. Bot engine for create bots in Telegram and VK.
 - VKBottle. Bot framework for develop bots in VK.
 - VK_API. Simple library for access to VKAPI.
+
 And many others library`s...
 
 ## Author
