@@ -110,13 +110,13 @@ class VK(ContextInstanceMixin):
             params = {k: v for k, v in params.items() if v is not None}
         return await self._api_request(method_name=method_name, params=params)
 
-    async def execute_api_request(self, vk_script: str):
+    async def execute_api_request(self, vk_code: str):
         """
+        https://vk.com/dev/execute
 
         :param vk_script: script for execute. Example: API.status.get()
         :return:
         """
-        vk_code = f"return [{vk_script},];"
         return await self.api_request("execute", params={"code": vk_code})
 
     def get_api(self):
