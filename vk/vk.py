@@ -48,11 +48,11 @@ logger = logging.getLogger(__name__)
 
 class VK(ContextInstanceMixin):
     def __init__(
-            self,
-            access_token: str,
-            *,
-            loop: AbstractEventLoop = None,
-            client: ClientSession = None,
+        self,
+        access_token: str,
+        *,
+        loop: AbstractEventLoop = None,
+        client: ClientSession = None,
     ):
 
         """
@@ -64,7 +64,9 @@ class VK(ContextInstanceMixin):
         self.access_token = access_token
         self.loop = loop if loop is not None else asyncio.get_event_loop()
         self.client = (
-            client if client is not None else ClientSession(json_serialize=JSON_LIBRARY.dumps)
+            client
+            if client is not None
+            else ClientSession(json_serialize=JSON_LIBRARY.dumps)
         )
         self.api_version = API_VERSION
 
@@ -73,7 +75,7 @@ class VK(ContextInstanceMixin):
         VK.set_current(self)
 
     async def _api_request(
-            self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
+        self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
     ):
         """
 
@@ -106,18 +108,18 @@ class VK(ContextInstanceMixin):
         :param params:
         :return:
         """
-        if params:
+        if isinstance(params, dict):
             params = {k: v for k, v in params.items() if v is not None}
         return await self._api_request(method_name=method_name, params=params)
 
-    async def execute_api_request(self, vk_code: str):
+    async def execute_api_request(self, code: str):
         """
         https://vk.com/dev/execute
 
-        :param vk_script: script for execute. Example: API.status.get()
+        :param code: code for execute. Example: return API.status.get();
         :return:
         """
-        return await self.api_request("execute", params={"code": vk_code})
+        return await self.api_request("execute", params={"code": code})
 
     def get_api(self):
         """

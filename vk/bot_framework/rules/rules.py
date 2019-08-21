@@ -79,6 +79,3 @@ class ChatAction(NamedRule):
             action = Action(action)
             if action is self.action:
                 return True
-
-
-

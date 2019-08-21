@@ -54,12 +54,15 @@ class Message(BaseModel):
             peer_id=self.peer_id,
             attachment=attachment,
             reply_to=self.id,
-            keyboard=keyboard
+            keyboard=keyboard,
         )
 
     async def answer(self, message: str, attachment: str = None, keyboard: dict = None):
         return await self.api.messages.send(
-            message=message, peer_id=self.peer_id, attachment=attachment, keyboard=keyboard
+            message=message,
+            peer_id=self.peer_id,
+            attachment=attachment,
+            keyboard=keyboard,
         )
 
 

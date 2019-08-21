@@ -48,7 +48,7 @@ class Dispatcher(ContextInstanceMixin):
         return decorator
 
     def register_event_handler(
-            self, coro: typing.Callable, event_type: Event, rules: typing.List
+        self, coro: typing.Callable, event_type: Event, rules: typing.List
     ):
         handler = Handler(event_type, coro, rules=rules)
         self._register_handler(handler)
@@ -69,7 +69,9 @@ class Dispatcher(ContextInstanceMixin):
         self._rule_factory.setup(rule)
 
     async def _process_event(self, event: dict):
-        data = {}  # sended to middlewares, after to handlers. append your data in middlewares.
+        data = (
+            {}
+        )  # sended to middlewares, after to handlers. append your data in middlewares.
 
         _skip_handler, data = await self._middleware_manager.trigger_pre_process_middlewares(
             event, data

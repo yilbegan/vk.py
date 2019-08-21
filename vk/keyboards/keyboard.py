@@ -166,5 +166,5 @@ class Keyboard:
         :return:
         """
         keyboard = cls(one_time=True)
-        keyboard.keyboard['buttons'] = []
+        keyboard.keyboard["buttons"] = []
         return keyboard.get_keyboard()

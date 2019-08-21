@@ -64,4 +64,3 @@ class Attachment(BaseModel):
     sticker: Sticker = None
     pretty_cards: PrettyCards = None
     audio_message: AudioMsg = None
-

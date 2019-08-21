@@ -25,11 +25,11 @@ class TaskManager:
         self.lock: bool = False  # For raise Exceptions when user want add tasks to running loop.
 
     def run(
-            self,
-            on_shutdown: typing.Callable = None,
-            on_startup: typing.Callable = None,
-            asyncio_debug_mode: bool = False,
-            auto_reload: bool = False,
+        self,
+        on_shutdown: typing.Callable = None,
+        on_startup: typing.Callable = None,
+        asyncio_debug_mode: bool = False,
+        auto_reload: bool = False,
     ):
         """
         Method which run event loop
