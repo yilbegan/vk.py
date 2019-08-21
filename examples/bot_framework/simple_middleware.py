@@ -22,6 +22,7 @@ class MyMiddleware(BaseMiddleware):
         print("Called before handlers!")
         if event["type"] != "message_new":
             raise SkipHandler
+        data["my_message"] = "hello, handler!"
         return data
 
     async def post_process_event(self):
@@ -30,6 +31,7 @@ class MyMiddleware(BaseMiddleware):
 
 @dp.message_handler(rules.Command("start"))
 async def handle(message: types.Message, data: dict):
+    print(data["my_message"]) # hello, handler!
     await message.reply("Hello!")
 
 

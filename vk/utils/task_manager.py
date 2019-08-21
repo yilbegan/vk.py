@@ -15,14 +15,12 @@ logger = logging.getLogger()
 
 class TaskManager:
     """
-    Task manager which present to user high-level API of asyncio operations (Less part :))
+    Task manager represent to user high-level API of asyncio interface (Less part :))
     """
 
     def __init__(self, loop: asyncio.AbstractEventLoop):
         self.tasks: list = []
         self.loop = loop
-
-        self.lock: bool = False  # For raise Exceptions when user want add tasks to running loop.
 
     def run(
         self,
@@ -36,7 +34,7 @@ class TaskManager:
 
         :param auto_reload: auto reload code when changes
         :param on_shutdown: coroutine which runned after complete tasks
-        :param on_startup: coroutine which runned before run main tasks
+        :param on_startup: coroutine which runned before start main tasks
         :param asyncio_debug_mode: asyncio debug mode state
         :return:
         """
@@ -52,14 +50,12 @@ class TaskManager:
             logger.info("Loop started!")
             if asyncio_debug_mode:
                 self.loop.set_debug(enabled=True)
-            self.lock = True
             if auto_reload:
                 self.loop.create_task(_auto_reload())
             self.loop.run_until_complete(tasks)
         finally:
             if on_shutdown is not None:
                 self.loop.run_until_complete(on_shutdown())
-            self.lock = False
 
     def close(self):
         """
@@ -76,18 +72,26 @@ class TaskManager:
         :param task: coroutine for run in loop
         :return:
         """
-        if not self.lock:
-            if asyncio.iscoroutinefunction(task):
-                self.tasks.append(task)
-                logger.info(f"Task {task.__name__.upper()} successfully added!")
-            else:
-                raise RuntimeError("Unexpected task. Tasks may be only coroutine")
+        if asyncio.iscoroutinefunction(task):
+            self.tasks.append(task)
+            logger.info(f"Task {task.__name__} successfully added!")
         else:
-            raise RuntimeError("Loop already running. Adding tasks is impossible")
+            raise RuntimeError("Unexpected task. Tasks may be only coroutine")
 
     def run_task(self, task: typing.Callable):
         """
-        Add task to running loop
+        Create task in loop
+
+        >> async def other_coro():
+            while True:
+                print("hello, my friend!")
+                await asyncio.sleep(5)
+
+        >> async def my_pretty_coro():
+            task_manager.run_task(other_coro)
+            return True
+
+
         :param task:
         :return:
         """

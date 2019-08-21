@@ -27,7 +27,6 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
     async def _prepare_longpoll(self):
         """
-
         :return:
         """
         resp = await self.get_server()
@@ -41,7 +40,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
     async def get_server(self) -> dict:
         """
-
+        Get polling server.
         :return:
         """
         resp = await self.vk.api_request(
@@ -51,7 +50,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
     async def get_updates(self, key: str, server: str, ts: str) -> dict:
         """
-
+        Get updates from VK.
         :param key:
         :param server:
         :param ts:
@@ -67,7 +66,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
     async def listen(self) -> list:
         """
 
-        :return: list of event
+        :return: list of updates coming from VK
         """
         try:
             updates = await self.get_updates(
@@ -77,7 +76,7 @@ class BotLongPoll(mixins.ContextInstanceMixin):
             if updates["updates"]:
                 return updates["updates"]
         except Exception as e:
-            logger.exception("Longpoll have trouble...")
+            logger.exception("Polling have trouble...")
 
     async def run(self) -> dict:
         """
