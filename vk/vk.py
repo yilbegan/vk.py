@@ -48,11 +48,11 @@ logger = logging.getLogger(__name__)
 
 class VK(ContextInstanceMixin):
     def __init__(
-        self,
-        access_token: str,
-        *,
-        loop: AbstractEventLoop = None,
-        client: ClientSession = None,
+            self,
+            access_token: str,
+            *,
+            loop: AbstractEventLoop = None,
+            client: ClientSession = None,
     ):
 
         """
@@ -73,7 +73,7 @@ class VK(ContextInstanceMixin):
         VK.set_current(self)
 
     async def _api_request(
-        self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
+            self, method_name: typing.AnyStr, params: dict = None, _raw_mode: bool = False
     ):
         """
 
@@ -109,6 +109,15 @@ class VK(ContextInstanceMixin):
         if params:
             params = {k: v for k, v in params.items() if v is not None}
         return await self._api_request(method_name=method_name, params=params)
+
+    async def execute_api_request(self, vk_script: str):
+        """
+
+        :param vk_script: script for execute. Example: API.status.get()
+        :return:
+        """
+        vk_code = f"return [{vk_script},];"
+        return await self.api_request("execute", params={"code": vk_code})
 
     def get_api(self):
         """
